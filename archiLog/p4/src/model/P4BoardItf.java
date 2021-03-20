@@ -7,17 +7,17 @@ public interface P4BoardItf {
 	
 	public void init(P4Player p1, P4Player p2);
 	
-	public P4Player player1();
-	public P4Player player2();
+	public P4Player getPlayer1();
+	public P4Player getPlayer2();
+	public P4Player getCurrentPlayer();
 	
-	public P4Player currentPlayer();
 	
-	public boolean end();
 	public void play(int col);
 	
 	public String toString();
 	public boolean isFree(int col);
 	
-	public boolean checkWin(int col, P4Player player);	
+	public boolean checkAlignment(int col, P4Player player);	
+	public boolean isGameOver();
 	
 }

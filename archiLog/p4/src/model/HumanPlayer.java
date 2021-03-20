@@ -4,6 +4,12 @@ import java.util.Scanner;
 
 public class HumanPlayer implements P4Player {
 	
+	private String _name;
+	
+	public HumanPlayer(String _name) {
+		this._name = _name;
+	}
+
 	@Override
 	public int play(P4BoardItf board) {
 		Scanner sc = new Scanner(System.in);
@@ -19,6 +25,12 @@ public class HumanPlayer implements P4Player {
 		}
 		//sc.close();
 		return position;
+	}
+
+	@Override
+	public String getName() {
+		
+		return _name;
 	}
 	
 	

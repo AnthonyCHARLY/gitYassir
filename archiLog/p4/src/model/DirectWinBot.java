@@ -2,16 +2,24 @@ package model;
 
 public class DirectWinBot extends P4PlayerDecorator{
 
+	private String _name;
+	
 	public DirectWinBot(P4Player _deco) {
 		super(_deco);
+		_name="Level3Bot";
 	}
 	
 	public int play(P4BoardItf board) {
-		for (int position=0; position < P4BoardItf.WIDTH; ++position) { 
-			if (board.checkWin(position, this))
-				return position;
+		for (int col=0; col < P4BoardItf.WIDTH; ++col) { 
+			if (board.checkAlignment(col, this))
+				return col;
 		}
 		return super.play(board);
+	}
+
+	@Override
+	public String getName() {
+		return _name;
 	}
 
 }

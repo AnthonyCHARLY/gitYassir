@@ -1,3 +1,5 @@
+
+
 import model.BotAbstractFactory;
 import model.HumanPlayer;
 import model.Level3Bot;
@@ -9,10 +11,10 @@ public class P4Main {
 
 	public static void run(P4BoardItf board) {
 		
-		while(!board.end()) {
+		while(!board.isGameOver()) {
 			System.out.println(board);
-			System.out.println("Player " + board.currentPlayer() +  " turn");
-			board.play(board.currentPlayer().play(board));
+			System.out.println("Player " + board.getCurrentPlayer().getName() +  " turn");
+			board.play(board.getCurrentPlayer().play(board));
 		}
 		
 		System.out.println(board);
@@ -21,7 +23,8 @@ public class P4Main {
 		P4BoardItf board = P4BoardImpl.createintance();
 		BotAbstractFactory factory = new Level3Bot();
 		
-		P4Player p1 = new HumanPlayer();
+		
+		P4Player p1 = new HumanPlayer("Anthony");
 		P4Player p2 = factory.create();
 		//P4Player p2 = new DirectWinBot(p,new OpponentBot(p,new RandomBot(p)));
 		board.init(p1, p2);

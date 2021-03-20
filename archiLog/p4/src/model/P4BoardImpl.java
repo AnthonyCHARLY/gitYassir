@@ -3,138 +3,187 @@ package model;
 import java.util.HashMap;
 
 public class P4BoardImpl implements P4BoardItf{
+	
 	private P4Player [][] _tab;
-	private boolean _finished;
 	private int _freePlaces;
-	private P4Player _player, _p1, _p2;
+	private P4Player _currentPlayer, _p1, _p2;
+	private boolean _isGameOver;
 	/* SINGLETON AVEC THREAD*/
-	private static HashMap<Long,P4BoardImpl> _instance= new HashMap<Long,P4BoardImpl>();
+	private static HashMap<Long,P4BoardImpl> _Boardinstance= new HashMap<Long,P4BoardImpl>();
 	//bloquer le constructeur
 	private P4BoardImpl() {}
 	
 	public static P4BoardImpl createintance() {
+		
 		Thread currentThread = Thread.currentThread();
 		long id_thread = currentThread.getId();
-		if(_instance.get(currentThread)== null) {
-			_instance.put(id_thread, new P4BoardImpl());
+		
+		if(_Boardinstance.get(currentThread)== null) {
+			_Boardinstance.put(id_thread, new P4BoardImpl());
 		}
-		return _instance.get(id_thread);
+		
+		return _Boardinstance.get(id_thread);
 	}
 	
-	public P4Player currentPlayer() {
-		return _player;
+	public P4Player getCurrentPlayer() {
+		return _currentPlayer;
 	}
 
-	public P4Player player1() {
+	public P4Player getPlayer1() {
 		return _p1;
 	}
-	public P4Player player2() {
+	public P4Player getPlayer2() {
 		return _p2;
 	}
 	public void init(P4Player p1, P4Player p2) {
+		
 		_p1 = p1;
 		_p2 = p2;
-		_player = _p1;
+		
+		_currentPlayer = _p1;
 		_tab = new P4Player[WIDTH][HEIGHT];
-		for (int i=0; i < WIDTH; ++i)
-			for (int j=0; j < HEIGHT; ++j)
-				_tab[i][j] = null;
-		_finished = false;
+		
+		for (int column=0; column < WIDTH; ++column)
+			for (int ligne=0; ligne < HEIGHT; ++ligne)
+				_tab[column][ligne] = null;
+		
+		_isGameOver = false;
 		_freePlaces = WIDTH * HEIGHT;
 	}
 	
 	public String toString() {
+		
 		StringBuffer str = new StringBuffer();
-		str.append("***************\n");
-		for (int i=WIDTH-1; i >=0; --i) {
+		
+		for (int y=HEIGHT-1 ; y >= 0; y--) {
+			
 			str.append("|");
-			for (int j=0; j < HEIGHT; ++j) {
-				if (_tab[i][j] == _p1)
+			
+			for (int x=0; x < WIDTH; x++) {
+				if (_tab[x][y] == _p1)
 					str.append("X");
-				if (_tab[i][j] == null)
+				
+				if (_tab[x][y] == null)
 					str.append(" ");
-				if (_tab[i][j] == _p2)
+				
+				if (_tab[x][y] == _p2)
 					str.append("O");
+				
 				str.append("|");
 			}
+			
 			str.append("\n");
 		}
-		str.append("***************\n");
+		for(int x = 0 ; x < WIDTH ; x++)
+			str.append("**");
+		str.append("*\n");
 		return str.toString();
-	}
-
-	public boolean end() {
-		return _finished;
 	}
 	
 	
 	public boolean isFree(int col) {
-		if(_freePlaces <= 0) return false;
-		if (col <0 || col >= WIDTH) return false;
-		int i=0;
-		while(i < HEIGHT && _tab[i][col] != null)
-			++i;
-		if (i >= HEIGHT)
+		
+		if(_freePlaces <= 0) 
 			return false;
+		
+		if (col < 0 || col >= WIDTH) 
+			return false;
+		
+		int ligne=0;
+		while(ligne < HEIGHT && _tab[col][ligne] != null)
+			++ligne;
+		
+		if (ligne >= HEIGHT)
+			return false;
+		
 		return true;
 	}
 	
 	private P4Player switchPlayer() {
-		if (_player == _p1)
+		if (_currentPlayer == _p1)
 			return _p2;
 		else 
 			return _p1;
 	}
 	
 	public void play(int col) {
-		if (end()) return;
+		
+		if (isGameOver()) return;
+		
 		--_freePlaces;
-		int i=0;
-		while(i < HEIGHT && _tab[i][col] != null)
-			++i;
-		if (i >= HEIGHT) {
+		
+		int ligne=0;
+		while(ligne < HEIGHT && _tab[col][ligne] != null)
+			++ligne;
+		
+		if (ligne >= HEIGHT) {
 			//error
 		}
-		_tab[i][col] = _player;
-		if (testwin(i, col)) {
-			System.out.println("player " + _player + " win");
-			_finished = true;
+		
+		boolean res = checkAlignment(col, _currentPlayer);
+		_tab[col][ligne] = _currentPlayer;
+		if (res) {
+			_isGameOver = true;
+			System.out.println("player " + _currentPlayer.getName() + " win");
 			return;
 		}
-		_player = switchPlayer();
+		_currentPlayer = switchPlayer();
 	}
-
-	public boolean testwin(int i, int col) {
-		int l = 1 , h = 1, d1 = 1, d2 = 1;
-		P4Player p = _tab[i][col];
-
-		for (int x = i + 1; x < WIDTH && _tab[x][col] == p; ++x) ++l;
-		for (int x = i - 1; x >=  0   && _tab[x][col] == p; --x) ++l;
-
-		for (int x = col + 1; x < WIDTH && _tab[i][x] == p; ++x) ++h;
-		for (int x = col - 1; x >=  0   && _tab[i][x] == p; --x) ++h;
-
-		for (int x = i + 1, y = col + 1; x < WIDTH && y < HEIGHT && _tab[x][y] == p; ++x, ++y) ++d1;
-		for (int x = i - 1, y = col - 1; x >= 0 && y >= 0 && _tab[x][y] == p; --x, --y) ++d1;
-
-		for (int x = i + 1, y = col - 1; x < WIDTH && y >= 0     && _tab[x][y] == p; ++x, --y) ++d2;
-		for (int x = i - 1, y = col + 1; x >= 0    && y < HEIGHT && _tab[x][y] == p; --x, ++y) ++d2;
-		//System.out.println("res " +l + " " + h + " " + d1 +  " " +d2);
-		if (l >3)  return true;
-		if (h >3)  return true;
-		if (d1 >3) return true;
-		if (d2 >3) return true;
-		return  false;
+	
+	public boolean checkHorizonalAlignment(int ligne, int column, P4Player p) {
+		
+		int res = 1;
+		
+		for (int x = column + 1; x < WIDTH && _tab[x][ligne] == p; x++) res++;
+		for (int x = column - 1; x >=  0   && _tab[x][ligne] == p; x--) res++;
+		
+		return res > 3;
 	}
-
-	public boolean checkWin(int col, P4Player player) {
+	
+	public boolean checkVerticalAlignment(int ligne, int column, P4Player p) {
+		
+		int res = 1;
+		
+		for (int y = ligne + 1; y < WIDTH && _tab[column][y] == p; y++) res++;
+		for (int y = ligne - 1; y >=  0   && _tab[column][y] == p; y--) res++;
+		
+		return res > 3;
+	}
+	
+	public boolean checkDiagonalAlignment(int ligne, int column, P4Player p) {
+		
+		int botLeftTopRightRes = 1;
+		int topLeftBotRightRes = 1;
+		
+		for (int x = column + 1, y = ligne + 1 ; x < WIDTH && y < HEIGHT && _tab[x][y] == p; x++, y++) botLeftTopRightRes++;
+		for (int x = column - 1, y = ligne - 1 ; x >= 0 && y >= 0 && _tab[x][y] == p; x--, y--) botLeftTopRightRes++;
+		
+		for (int x = column + 1, y = ligne - 1 ; x < WIDTH && y >= 0 && _tab[x][y] == p; x++, y--) topLeftBotRightRes++;
+		for (int x = column - 1, y = ligne + 1 ; x >= 0 && y < HEIGHT && _tab[x][y] == p; x--, y++) topLeftBotRightRes++;
+		
+		return botLeftTopRightRes > 3 || topLeftBotRightRes > 3;
+	}
+		
+	@Override
+	public boolean checkAlignment(int col, P4Player p) {
+		
 		if (!isFree(col)) return false;
-		int i=0;
-		while(i < HEIGHT && _tab[i][col] != null)
-			++i;
-		_tab[i][col] = player;
-		boolean result = testwin(i, col);
-		_tab[i][col] = null;
+		
+		int ligne = 0;
+		while(ligne < HEIGHT && _tab[col][ligne] != null)
+			++ligne;
+		
+		_tab[col][ligne] = p;
+		boolean result = checkVerticalAlignment(ligne,col,p) || checkHorizonalAlignment(ligne,col,p) || checkDiagonalAlignment(ligne,col,p);
+		_tab[col][ligne] = null;
+		
 		return result;
+	
+		}
+
+	@Override
+	public boolean isGameOver() {
+		return _isGameOver;
 	}
+
 }
