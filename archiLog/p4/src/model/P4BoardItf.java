@@ -8,6 +8,7 @@ public interface P4BoardItf {
 	
 	public int getWidth();
 	public int getHeight();
+	public P4Player getTab(int col, int line);
 	
 	public P4Player getPlayer1();
 	public P4Player getPlayer2();

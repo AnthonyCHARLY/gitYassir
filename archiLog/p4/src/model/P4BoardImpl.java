@@ -5,6 +5,10 @@ import java.util.Scanner;
 
 import ui.P4Builder;
 
+/**
+ * Design Pattern : Singleton for createinstance
+ */
+
 public class P4BoardImpl implements P4BoardItf{
 	
 	private int _alignementSizeVictory;
@@ -73,6 +77,10 @@ public class P4BoardImpl implements P4BoardItf{
 	
 	public int getHeight() {
 		return _height;
+	}
+	
+	public P4Player getTab(int col, int line) {
+		return _tab[col][line];
 	}
 	
 	public P4Player getCurrentPlayer() {
@@ -202,7 +210,7 @@ public class P4BoardImpl implements P4BoardItf{
 		_tab[col][ligne] = _currentPlayer;
 		if (res) {
 			_isGameOver = true;
-			System.out.println("player " + _currentPlayer.getName() + " win");
+			System.out.println(_currentPlayer.getName() + " win");
 			return;
 		}
 		_currentPlayer = switchPlayer();

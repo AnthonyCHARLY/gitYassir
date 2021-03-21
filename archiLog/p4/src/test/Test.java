@@ -12,7 +12,6 @@ import model.Level3Bot;
 import model.P4BoardImpl;
 import model.P4BoardItf;
 import model.P4Player;
-import model.Run;
 
 public class Test {
 	
@@ -39,16 +38,18 @@ public class Test {
     }
     
     @org.junit.Test
-    public void runGame() {
-    	P4BoardItf board = P4BoardImpl.createintance();
-        BotAbstractFactory factory = new Level3Bot();
+	public void testPositionPlayer() {
+		P4BoardItf board = P4BoardImpl.createintance();
+		BotAbstractFactory factory = new Level3Bot();
 
+		P4Player p1 = factory.create();
+		P4Player p2 = factory.create();
+		board.init(p1, p2);
 
-        P4Player p1 = factory.create();
-        P4Player p2 = factory.create();
-        board.init(p1, p2);
-        Run.run(board);
-
-    }
+		board.play(0);
+		board.play(0);
+		assertEquals(board.getPlayer1(), board.getTab(0, 0));
+		assertEquals(board.getPlayer2(), board.getTab(0, 1));
+	}
 
 }

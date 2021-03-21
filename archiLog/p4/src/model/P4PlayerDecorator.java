@@ -1,5 +1,9 @@
 package model;
 
+/**
+ * Design Pattern : Decorator
+ */
+
 public abstract class P4PlayerDecorator implements P4Player{
 	
 	P4Player _deco;

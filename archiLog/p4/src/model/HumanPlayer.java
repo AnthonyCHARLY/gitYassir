@@ -6,8 +6,19 @@ public class HumanPlayer implements P4Player {
 	
 	private String _name;
 	
-	public HumanPlayer(String _name) {
-		this._name = _name;
+	public HumanPlayer() {
+		Scanner sc = new Scanner(System.in);
+		String name = "";
+		while (name.length() == 0) {
+			System.out.println("Enter Name :");
+			try {
+				String str = sc.nextLine();
+				name = str;
+			} catch (Exception e) {
+				System.out.println("Bad name value");
+			}
+		}
+		_name = name;
 	}
 
 	@Override
