@@ -10,7 +10,7 @@ public class DirectWinBot extends P4PlayerDecorator{
 	}
 	
 	public int play(P4BoardItf board) {
-		for (int col=0; col < P4BoardItf.WIDTH; ++col) { 
+		for (int col=0; col < board.getWidth(); ++col) { 
 			if (board.checkAlignment(col, this))
 				return col;
 		}

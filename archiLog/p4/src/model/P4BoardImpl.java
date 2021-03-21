@@ -1,9 +1,14 @@
 package model;
 
 import java.util.HashMap;
+import java.util.Scanner;
+
+import ui.P4Builder;
 
 public class P4BoardImpl implements P4BoardItf{
 	
+	private int _alignementSizeVictory;
+	private int _width, _height;
 	private P4Player [][] _tab;
 	private int _freePlaces;
 	private P4Player _currentPlayer, _p1, _p2;
@@ -11,7 +16,44 @@ public class P4BoardImpl implements P4BoardItf{
 	/* SINGLETON AVEC THREAD*/
 	private static HashMap<Long,P4BoardImpl> _Boardinstance= new HashMap<Long,P4BoardImpl>();
 	//bloquer le constructeur
-	private P4BoardImpl() {}
+	
+	private P4BoardImpl() {
+		Scanner sc = new Scanner(System.in);
+		int width = -1;
+		int height = -1;
+		int alignementSize = -1;
+		while (width < 0) {
+			System.out.println("Enter board Width :");
+			try {
+				String str = sc.nextLine();
+				width = Integer.parseInt(str);
+			} catch (Exception e) {
+				System.out.println("Bad width value");
+			}
+		}
+		//sc.close();
+		while (height < 0) {
+			System.out.println("Enter board Height :");
+			try {
+				String str = sc.nextLine();
+				height = Integer.parseInt(str);
+			} catch (Exception e) {
+				System.out.println("Bad height value");
+			}
+		}
+		while (alignementSize < 0) {
+			System.out.println("Enter alignement size for victory :");
+			try {
+				String str = sc.nextLine();
+				alignementSize = Integer.parseInt(str);
+			} catch (Exception e) {
+				System.out.println("Bad alignement size value");
+			}
+		}
+		_alignementSizeVictory = alignementSize;
+		_width = width;
+		_height = height;
+	}
 	
 	public static P4BoardImpl createintance() {
 		
@@ -23,6 +65,14 @@ public class P4BoardImpl implements P4BoardItf{
 		}
 		
 		return _Boardinstance.get(id_thread);
+	}
+	
+	public int getWidth() {
+		return _width;
+	}
+	
+	public int getHeight() {
+		return _height;
 	}
 	
 	public P4Player getCurrentPlayer() {
@@ -41,25 +91,26 @@ public class P4BoardImpl implements P4BoardItf{
 		_p2 = p2;
 		
 		_currentPlayer = _p1;
-		_tab = new P4Player[WIDTH][HEIGHT];
+		_tab = new P4Player[_width][_height];
 		
-		for (int column=0; column < WIDTH; ++column)
-			for (int ligne=0; ligne < HEIGHT; ++ligne)
+		for (int column=0; column < _width; ++column)
+			for (int ligne=0; ligne < _height; ++ligne)
 				_tab[column][ligne] = null;
 		
 		_isGameOver = false;
-		_freePlaces = WIDTH * HEIGHT;
+		_freePlaces = _width * _height;
 	}
+	
 	
 	public String toString() {
 		
 		StringBuffer str = new StringBuffer();
 		
-		for (int y=HEIGHT-1 ; y >= 0; y--) {
+		for (int y=_height-1 ; y >= 0; y--) {
 			
 			str.append("|");
 			
-			for (int x=0; x < WIDTH; x++) {
+			for (int x=0; x < _width; x++) {
 				if (_tab[x][y] == _p1)
 					str.append("X");
 				
@@ -74,10 +125,38 @@ public class P4BoardImpl implements P4BoardItf{
 			
 			str.append("\n");
 		}
-		for(int x = 0 ; x < WIDTH ; x++)
+		for(int x = 0 ; x < _width ; x++)
 			str.append("**");
 		str.append("*\n");
 		return str.toString();
+	}
+	
+	
+
+	public void builder(P4Builder builder) {
+
+		builder.createNewP4Builder();
+
+		builder.beginBoard();
+
+		for (int y = _height - 1; y >= 0; y--) {
+			builder.beginLine();
+			builder.beginCase();
+			for (int x = 0; x < _width; x++) {
+				if (_tab[x][y] == _p1)
+					builder.addTokenPlayer1();
+				if (_tab[x][y] == null)
+					builder.addEmptyCase();
+				if (_tab[x][y] == _p2)
+					builder.addTokenPlayer2();
+				builder.endCase();
+				if (x != _width - 1)
+					builder.beginCase();
+			}
+			builder.endLine();
+		}
+		builder.endBoard(_width);
+		builder.finish();
 	}
 	
 	
@@ -86,14 +165,14 @@ public class P4BoardImpl implements P4BoardItf{
 		if(_freePlaces <= 0) 
 			return false;
 		
-		if (col < 0 || col >= WIDTH) 
+		if (col < 0 || col >= _width) 
 			return false;
 		
 		int ligne=0;
-		while(ligne < HEIGHT && _tab[col][ligne] != null)
+		while(ligne < _height && _tab[col][ligne] != null)
 			++ligne;
 		
-		if (ligne >= HEIGHT)
+		if (ligne >= _height)
 			return false;
 		
 		return true;
@@ -107,16 +186,15 @@ public class P4BoardImpl implements P4BoardItf{
 	}
 	
 	public void play(int col) {
-		
 		if (isGameOver()) return;
 		
 		--_freePlaces;
 		
 		int ligne=0;
-		while(ligne < HEIGHT && _tab[col][ligne] != null)
+		while(ligne < _height && _tab[col][ligne] != null)
 			++ligne;
 		
-		if (ligne >= HEIGHT) {
+		if (ligne >= _height) {
 			//error
 		}
 		
@@ -134,20 +212,20 @@ public class P4BoardImpl implements P4BoardItf{
 		
 		int res = 1;
 		
-		for (int x = column + 1; x < WIDTH && _tab[x][ligne] == p; x++) res++;
+		for (int x = column + 1; x < _width && _tab[x][ligne] == p; x++) res++;
 		for (int x = column - 1; x >=  0   && _tab[x][ligne] == p; x--) res++;
 		
-		return res > 3;
+		return res >= _alignementSizeVictory;
 	}
 	
 	public boolean checkVerticalAlignment(int ligne, int column, P4Player p) {
 		
 		int res = 1;
 		
-		for (int y = ligne + 1; y < WIDTH && _tab[column][y] == p; y++) res++;
+		for (int y = ligne + 1; y < _width && _tab[column][y] == p; y++) res++;
 		for (int y = ligne - 1; y >=  0   && _tab[column][y] == p; y--) res++;
 		
-		return res > 3;
+		return res >= _alignementSizeVictory;
 	}
 	
 	public boolean checkDiagonalAlignment(int ligne, int column, P4Player p) {
@@ -155,13 +233,13 @@ public class P4BoardImpl implements P4BoardItf{
 		int botLeftTopRightRes = 1;
 		int topLeftBotRightRes = 1;
 		
-		for (int x = column + 1, y = ligne + 1 ; x < WIDTH && y < HEIGHT && _tab[x][y] == p; x++, y++) botLeftTopRightRes++;
+		for (int x = column + 1, y = ligne + 1 ; x < _width && y < _height && _tab[x][y] == p; x++, y++) botLeftTopRightRes++;
 		for (int x = column - 1, y = ligne - 1 ; x >= 0 && y >= 0 && _tab[x][y] == p; x--, y--) botLeftTopRightRes++;
 		
-		for (int x = column + 1, y = ligne - 1 ; x < WIDTH && y >= 0 && _tab[x][y] == p; x++, y--) topLeftBotRightRes++;
-		for (int x = column - 1, y = ligne + 1 ; x >= 0 && y < HEIGHT && _tab[x][y] == p; x--, y++) topLeftBotRightRes++;
+		for (int x = column + 1, y = ligne - 1 ; x < _width && y >= 0 && _tab[x][y] == p; x++, y--) topLeftBotRightRes++;
+		for (int x = column - 1, y = ligne + 1 ; x >= 0 && y < _height && _tab[x][y] == p; x--, y++) topLeftBotRightRes++;
 		
-		return botLeftTopRightRes > 3 || topLeftBotRightRes > 3;
+		return botLeftTopRightRes >= _alignementSizeVictory || topLeftBotRightRes >= _alignementSizeVictory;
 	}
 		
 	@Override
@@ -170,7 +248,7 @@ public class P4BoardImpl implements P4BoardItf{
 		if (!isFree(col)) return false;
 		
 		int ligne = 0;
-		while(ligne < HEIGHT && _tab[col][ligne] != null)
+		while(ligne < _height && _tab[col][ligne] != null)
 			++ligne;
 		
 		_tab[col][ligne] = p;

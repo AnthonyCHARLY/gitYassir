@@ -13,9 +13,9 @@ public class RandomBot implements P4Player{
 	@Override
 	public int play(P4BoardItf board) {
 		Random r = new Random();
-		int col = r.nextInt(P4BoardItf.WIDTH);
+		int col = r.nextInt(board.getWidth());
 		while(!board.isFree(col))
-			col = r.nextInt(P4BoardItf.WIDTH);
+			col = r.nextInt(board.getWidth());
 		return col;
 	}
 

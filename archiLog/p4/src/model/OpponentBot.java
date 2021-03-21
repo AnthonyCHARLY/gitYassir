@@ -18,7 +18,7 @@ public class OpponentBot extends P4PlayerDecorator{
 		else
 			_opponent = board.getPlayer2();
 		
-		for (int col=0; col < P4BoardItf.WIDTH ; ++col) { 
+		for (int col=0; col < board.getWidth() ; ++col) { 
 			if (board.checkAlignment(col, _opponent))
 				return col;
 		}

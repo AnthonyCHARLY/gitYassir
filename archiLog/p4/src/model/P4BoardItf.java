@@ -1,11 +1,13 @@
 package model;
 
-public interface P4BoardItf {
+import ui.P4Builder;
 
-	public static final int WIDTH  = 7;
-	public static final int HEIGHT = 7;
+public interface P4BoardItf {
 	
 	public void init(P4Player p1, P4Player p2);
+	
+	public int getWidth();
+	public int getHeight();
 	
 	public P4Player getPlayer1();
 	public P4Player getPlayer2();
@@ -15,6 +17,7 @@ public interface P4BoardItf {
 	public void play(int col);
 	
 	public String toString();
+	public void builder(P4Builder Bbuilder);
 	public boolean isFree(int col);
 	
 	public boolean checkAlignment(int col, P4Player player);	
