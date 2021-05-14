@@ -10,7 +10,9 @@ public class BonusBoxLlv2 extends DecoratorBox{
 	@Override
 	public void effect(Player player) {
 		// TODO Auto-generated method stub
+		int bonus =2;
 		box.effect(player);
+		player.setPosition(player.getPositon()+bonus);
 		
 	}
 

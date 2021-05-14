@@ -11,6 +11,8 @@ public class BonusBoxLvl3 extends DecoratorBox{
 	public void effect(Player player) {
 		// TODO Auto-generated method stub
 		box.effect(player);
+		
+		player.getArmy().addEquipment(player.getArmyFactory().attackWeapon());
 	}
 
 	public void description() {
