@@ -29,6 +29,9 @@ public class Board {
 	public void turn() {
 		int dice = (int)Math.random() * 6 + 1;
 		currentPlayer.forward(dice);
+		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
+	
+	
 
 }
