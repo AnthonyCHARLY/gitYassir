@@ -25,7 +25,5 @@ public interface PlayerItf {
 	public Memento getMemento();
 	
 	public void setMemento(Memento m);
-	
-	
 
 }

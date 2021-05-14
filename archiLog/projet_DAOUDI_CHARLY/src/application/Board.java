@@ -29,8 +29,21 @@ public class Board {
 	public void turn() {
 		int dice = (int)Math.random() * 6 + 1;
 		currentPlayer.forward(dice);
+		
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
+	
+	public void boardBuilder(Builder b) {
+		b.buildHeader(); // haut de 
+		b.buildBoard(); //game board
+		b.buildUtil(); //buttons
+		b.buildPlayers(); //players positions
+		b.buildStatements(); //current player statments
+		b.buildMessage(); //turn infromations 
+		
+	}
+	
+	
 	
 	
 
