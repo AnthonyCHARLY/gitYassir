@@ -1,9 +1,10 @@
 package application;
 
 import soldier.core.AgeAbstractFactory;
+import soldier.core.Unit;
 import soldier.core.UnitGroup;
 
-public class Player {
+public class Player implements PlayerItf{
 	
 	private int position;
 	private String name;
@@ -17,24 +18,35 @@ public class Player {
 		this.armyFactory = armyFactory;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
-	
-	public UnitGroup getArmy() {
-		return army;
+
+	@Override
+	public void addInfantryUnit() {
+		army.addUnit(armyFactory.infantryUnit(name + "'s infantry"));
 	}
-	
-	public AgeAbstractFactory getArmyFactory() {
-		return armyFactory;
+
+	@Override
+	public void addRiderUnit() {
+		army.addUnit(armyFactory.infantryUnit(name + "'s rider"));
 	}
-	
-	public int getPositon() {
-		return position;
+
+	@Override
+	public void addDefenseWeapon() {
+		army.addEquipment(armyFactory.attackWeapon());
 	}
-	
-	public void setPosition(int position) {
-		this.position= position;
+
+	@Override
+	public void addAttackWeapon() {
+		army.addEquipment(armyFactory.defenseWeapon());
+	}
+
+	@Override
+	public void removeUnit(Unit u) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
