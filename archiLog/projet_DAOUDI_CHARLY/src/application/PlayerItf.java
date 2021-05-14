@@ -22,6 +22,10 @@ public interface PlayerItf {
 	
 	public void back(int value);
 	
+	public Memento getMemento();
+	
+	public void setMemento(Memento m);
+	
 	
 
 }

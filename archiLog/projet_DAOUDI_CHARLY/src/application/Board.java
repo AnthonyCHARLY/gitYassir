@@ -26,9 +26,9 @@ public class Board {
 		return _instance;
 	}
 	
-	public void move() {
-		int dice = (int)Math.random() * (7-1) + 1;
-		boxes.get(currentPlayer.getPositon()).effect(currentPlayer);
+	public void turn() {
+		int dice = (int)Math.random() * 6 + 1;
+		currentPlayer.forward(dice);
 	}
 
 }

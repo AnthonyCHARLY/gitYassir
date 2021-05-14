@@ -4,12 +4,22 @@ import soldier.core.AgeAbstractFactory;
 import soldier.core.Unit;
 import soldier.core.UnitGroup;
 
-public class Player implements PlayerItf{
+public class Player implements PlayerItf, Cloneable{
 	
 	private int position;
 	private String name;
 	private UnitGroup army;
 	private AgeAbstractFactory armyFactory;
+	
+	private class PlayerMemento implements Memento{
+		
+		public Player save = null;
+		
+		public PlayerMemento(Player origin) {
+			save = origin.clone();
+		}
+		
+	}
 	
 	public Player(String name, AgeAbstractFactory armyFactory) {
 		this.position = 0;
@@ -65,6 +75,28 @@ public class Player implements PlayerItf{
 			position = 0;
 		else
 			position -= value;
+	}
+
+	@Override
+	public Memento getMemento() {
+		return new PlayerMemento(this);
+	}
+
+	@Override
+	public void setMemento(Memento m) {
+		PlayerMemento pm = (PlayerMemento)m;
+		this.army = pm.save.army;
+		this.position = pm.save.position;
+	}
+	
+	@Override
+	public Player clone() {
+		Player res = null;
+		try {
+			res = (Player)super.clone();
+		}
+		catch(Exception e) {}
+		return res;
 	}
 
 }
