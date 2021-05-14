@@ -1,6 +1,6 @@
 package application;
 
 public interface Box {
- void effect(Player player);
+ void effect(PlayerItf player);
  void description();
 }

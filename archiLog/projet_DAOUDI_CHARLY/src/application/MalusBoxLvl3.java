@@ -8,7 +8,7 @@ public class MalusBoxLvl3 extends DecoratorBox{
 	}
 	
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
 		box.effect(player);
 	}

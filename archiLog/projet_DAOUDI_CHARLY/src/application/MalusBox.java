@@ -4,7 +4,7 @@ public class MalusBox implements Box {
 	
 	
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
 		
 	}

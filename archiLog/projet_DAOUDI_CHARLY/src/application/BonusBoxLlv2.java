@@ -1,5 +1,7 @@
 package application;
 
+import java.util.Random;
+
 public class BonusBoxLlv2 extends DecoratorBox{
 
 	public BonusBoxLlv2(Box decoratorbox) {
@@ -8,11 +10,12 @@ public class BonusBoxLlv2 extends DecoratorBox{
 	}
 	
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
 		int bonus =2;
 		box.effect(player);
-		player.setPosition(player.getPositon()+bonus);
+		Random rand = null;
+		player.forward(rand.nextInt((5 - 3) + 1) + 3);
 		
 	}
 

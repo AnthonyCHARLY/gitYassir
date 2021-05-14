@@ -6,16 +6,15 @@ import soldier.units.UnitHorseMan;
 public class BonusBox implements Box{
 
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
-		Unit horse = new UnitHorseMan("piccolo");
-		player.getArmy().removeUnit(horse);
+		player.addRiderUnit();
 	}
 
 	@Override
 	public void description() {
 		// TODO Auto-generated method stub
-		System.out.println(" Vous avez gagné un nouvel allié de la famille des UnitRider  ");
+		System.out.println(" Vous avez gagné un nouvel allié ");
 	}
 
 }

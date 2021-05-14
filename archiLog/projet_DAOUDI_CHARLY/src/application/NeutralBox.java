@@ -3,7 +3,7 @@ package application;
 public class NeutralBox implements Box{
 
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
 		
 	}

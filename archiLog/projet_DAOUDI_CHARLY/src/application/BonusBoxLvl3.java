@@ -8,11 +8,11 @@ public class BonusBoxLvl3 extends DecoratorBox{
 	}
 	
 	@Override
-	public void effect(Player player) {
+	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
 		box.effect(player);
 		
-		player.getArmy().addEquipment(player.getArmyFactory().attackWeapon());
+		player.addAttackWeapon();
 	}
 
 	public void description() {
