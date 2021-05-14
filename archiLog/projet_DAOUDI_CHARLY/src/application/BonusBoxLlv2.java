@@ -10,12 +10,13 @@ public class BonusBoxLlv2 extends DecoratorBox{
 	@Override
 	public void effect(Player player) {
 		// TODO Auto-generated method stub
+		box.effect(player);
 		
 	}
 
 	public void description() {
 		// TODO Auto-generated method stub
-		
+		box.description();
 	}
 
 }
