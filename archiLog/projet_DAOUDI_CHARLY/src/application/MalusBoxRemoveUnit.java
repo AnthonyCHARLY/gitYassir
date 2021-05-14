@@ -1,10 +1,8 @@
 package application;
 
-import java.util.Random;
+public class MalusBoxRemoveUnit extends DecoratorBox{
 
-public class BonusBoxLlv2 extends DecoratorBox{
-
-	public BonusBoxLlv2(Box decoratorbox) {
+	public MalusBoxRemoveUnit(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
@@ -12,11 +10,7 @@ public class BonusBoxLlv2 extends DecoratorBox{
 	@Override
 	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
-		int bonus =2;
 		box.effect(player);
-		Random rand = null;
-		player.forward(rand.nextInt((5 - 3) + 1) + 3);
-		
 	}
 
 	public void description() {

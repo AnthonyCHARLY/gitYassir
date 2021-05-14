@@ -1,8 +1,8 @@
 package application;
 
-public class MalusBoxLvl2 extends DecoratorBox{
+public class MalusBoxBack extends DecoratorBox{
 
-	public MalusBoxLvl2(Box decoratorbox) {
+	public MalusBoxBack(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}

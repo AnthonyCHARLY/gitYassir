@@ -1,8 +1,10 @@
 package application;
 
-public class BonusBoxLvl3 extends DecoratorBox{
+import java.util.Random;
 
-	public BonusBoxLvl3(Box decoratorbox) {
+public class BonusBoxForWard extends DecoratorBox{
+
+	public BonusBoxForWard(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
@@ -10,9 +12,11 @@ public class BonusBoxLvl3 extends DecoratorBox{
 	@Override
 	public void effect(PlayerItf player) {
 		// TODO Auto-generated method stub
+		int bonus =2;
 		box.effect(player);
+		Random rand = null;
+		player.forward(rand.nextInt((5 - 3) + 1) + 3);
 		
-		player.addAttackWeapon();
 	}
 
 	public void description() {
