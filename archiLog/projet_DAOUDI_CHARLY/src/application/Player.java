@@ -10,6 +10,7 @@ public class Player implements PlayerItf, Cloneable{
 	private String name;
 	private UnitGroup army;
 	private AgeAbstractFactory armyFactory;
+	private Memento checkpoint;
 	
 	private class PlayerMemento implements Memento{
 		
@@ -26,6 +27,7 @@ public class Player implements PlayerItf, Cloneable{
 		this.name = name;
 		this.army = new UnitGroup(name + "'s army");
 		this.armyFactory = armyFactory;
+		getMemento();
 	}
 	
 	@Override
@@ -78,15 +80,8 @@ public class Player implements PlayerItf, Cloneable{
 	}
 
 	@Override
-	public Memento getMemento() {
-		return new PlayerMemento(this);
-	}
-
-	@Override
-	public void setMemento(Memento m) {
-		PlayerMemento pm = (PlayerMemento)m;
-		this.army = pm.save.army;
-		this.position = pm.save.position;
+	public void getMemento() {
+		checkpoint = new PlayerMemento(this);
 	}
 	
 	@Override
@@ -97,6 +92,18 @@ public class Player implements PlayerItf, Cloneable{
 		}
 		catch(Exception e) {}
 		return res;
+	}
+	
+	@Override
+	public UnitGroup getArmy() {
+		return army;
+	}
+
+	@Override
+	public void backCheckpoint() {
+		PlayerMemento pm = (PlayerMemento)checkpoint;
+		this.army = pm.save.army;
+		this.position = pm.save.position;		
 	}
 
 }

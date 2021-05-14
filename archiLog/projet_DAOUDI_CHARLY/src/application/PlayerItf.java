@@ -1,10 +1,13 @@
 package application;
 
 import soldier.core.Unit;
+import soldier.core.UnitGroup;
 
 public interface PlayerItf {
 	
 	public String getName();
+	
+	public UnitGroup getArmy();
 	
 	public int getPosition();
 	
@@ -22,8 +25,8 @@ public interface PlayerItf {
 	
 	public void back(int value);
 	
-	public Memento getMemento();
+	public void getMemento();
 	
-	public void setMemento(Memento m);
+	public void backCheckpoint();
 
 }

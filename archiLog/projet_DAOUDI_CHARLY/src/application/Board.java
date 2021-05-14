@@ -5,6 +5,7 @@ import java.util.List;
 import soldier.ages.AgeFutureFactory;
 import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
+import soldier.core.UnitGroup;
 
 public class Board {
 	
@@ -29,11 +30,25 @@ public class Board {
 	public void turn() {
 		int dice = (int)Math.random() * 6 + 1;
 		currentPlayer.forward(dice);
-		
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
 	
+	public void fight() {
+		double order = Math.random();
+		UnitGroup team1 = order < 0.5 ? p1.getArmy() : p2.getArmy();
+		UnitGroup team2 = (team1 == p1.getArmy()) ? p2.getArmy() : p1.getArmy();
+		while(team1.alive() && team2.alive()) {
+			float st1 = team1.strike();
+			team2.parry(st1);
+			float st2 = team2.strike();
+			team1.parry(st2);
+		}
+		Player loser = p1.getArmy().alive() ? p2 : p1;
+		loser.backCheckpoint();
+	}
+	
 	public void boardBuilder(Builder b) {
+		
 		b.buildHeader(); // haut de 
 		b.buildBoard(); //game board
 		b.buildUtil(); //buttons
