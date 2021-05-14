@@ -25,7 +25,7 @@ public class Player implements PlayerItf, Cloneable{
 	public Player(String name, AgeAbstractFactory armyFactory) {
 		this.position = 0;
 		this.name = name;
-		this.army = new UnitGroup(name + "'s army");
+		this.army = new UnitGroup(name + ":: army");
 		this.armyFactory = armyFactory;
 		getMemento();
 	}
@@ -37,12 +37,12 @@ public class Player implements PlayerItf, Cloneable{
 
 	@Override
 	public void addInfantryUnit() {
-		army.addUnit(armyFactory.infantryUnit(name + "'s infantry"));
+		army.addUnit(armyFactory.infantryUnit(name + ":: infantry"));
 	}
 
 	@Override
 	public void addRiderUnit() {
-		army.addUnit(armyFactory.infantryUnit(name + "'s rider"));
+		army.addUnit(armyFactory.infantryUnit(name + ":: rider"));
 	}
 
 	@Override

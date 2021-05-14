@@ -14,10 +14,18 @@ public class Board {
 	private static Board _instance = null;
 	
 	private Board(String p1Name, String p2Name) {
+		
 		AgeAbstractFactory FutureFactory = new AgeFutureFactory();
 		AgeAbstractFactory MiddleFactory = new AgeMiddleFactory();
+		
 		p1 = new Player(p1Name, FutureFactory);
 		p2 = new Player(p2Name, MiddleFactory);
+		
+		p1.addInfantryUnit();
+		p1.addRiderUnit();
+		p2.addInfantryUnit();
+		p2.addRiderUnit();
+		
 		currentPlayer = p1;
 	}
 	
@@ -30,6 +38,11 @@ public class Board {
 	public void turn() {
 		int dice = (int)Math.random() * 6 + 1;
 		currentPlayer.forward(dice);
+		
+		if(p1.getPosition() == p2.getPosition()) { fight(); }
+		
+		boxes.get(currentPlayer.getPosition()).effect(currentPlayer);
+		
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
 	
