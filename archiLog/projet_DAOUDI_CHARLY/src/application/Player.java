@@ -49,4 +49,22 @@ public class Player implements PlayerItf{
 		
 	}
 
+	@Override
+	public int getPosition() {
+		return position;
+	}
+
+	@Override
+	public void forward(int value) {
+		position += value;
+	}
+
+	@Override
+	public void back(int value) {
+		if(position - value <= 0)
+			position = 0;
+		else
+			position -= value;
+	}
+
 }
