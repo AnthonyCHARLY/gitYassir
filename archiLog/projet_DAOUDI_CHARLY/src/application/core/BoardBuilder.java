@@ -40,12 +40,18 @@ public class BoardBuilder extends Application implements Builder {
 	private Group root = new Group();
 	private Button buttonde;
 	private Button buttonnotify;
+	private Label tour;
+	private Label descriptionp1;
+	private Label descriptionp2;
+	private Label victory;
+	private int tourInt=1;
 	
 	@Override
     public void start(Stage primaryStage) {
 		
 		 buildBoard();
 		 buildUtil();
+		 buildMessage();
 		 
 		 Scene scenegraph = new Scene (root,600,400) ;
 		 primaryStage.setScene (scenegraph) ;
@@ -68,14 +74,21 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
 	public void buildBoard() {
 		// TODO Auto-generated method stub
-		for(int i=0; i<6; i++)
-		    for(int j=0; j<6; j++)
+		int i,j=0;
+		for( i=0; i<6; i++)
+		    for( j=0; j<6; j++)
 		    {
 		      Rectangle rectangle = new Rectangle(50 + 50*i, 50+50*j, 50, 50);
 		      rectangle.setFill(Color.TRANSPARENT);
 		      rectangle.setStroke(Color.BLACK);
 		     // r.setOnMouseClicked(this);
-		      root.getChildren().add(rectangle);
+		      if((i== 0 ) || (j == 0 )) {
+		    	  root.getChildren().add(rectangle);
+		      }
+		      else if((j == 5 ) || (i == 5 )){
+			      root.getChildren().add(rectangle);
+			  }
+		      
 		    }
 	}
 
@@ -86,18 +99,30 @@ public class BoardBuilder extends Application implements Builder {
 		 buttonde.setText("Lancer le dé");
 		 
 		 
-		 Label tour= new Label("Tour 1");
+		 tour= new Label("Tour : 1");
 		 tour.setTextFill(Color.BLACK);
 		 tour.setLayoutX(500);
 		 tour.setVisible(true);
 		 
-		 Label victory= new Label(" Victoire");
+		 descriptionp1= new Label("Description P1: ");
+		 descriptionp1.setTextFill(Color.BLACK);
+		 descriptionp1.setLayoutX(400);
+		 descriptionp1.setLayoutY(100);
+		 descriptionp1.setVisible(true);
+		 
+		 descriptionp2= new Label("Description P2: ");
+		 descriptionp2.setTextFill(Color.BLACK);
+		 descriptionp2.setLayoutX(400);
+		 descriptionp2.setLayoutY(200);
+		 descriptionp2.setVisible(true);
+		 
+		 victory= new Label(" Victoire");
 		 victory.setTextFill(Color.BLACK);
 		 victory.setLayoutX(300);
 		 victory.setVisible(false);
 		 
 		 
-		 root.getChildren().addAll(buttonde,tour,victory);
+		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
 	}
 
 	@Override
@@ -119,9 +144,15 @@ public class BoardBuilder extends Application implements Builder {
 			 
             @Override
             public void handle(ActionEvent event) {
-                //
+               tour.setText("Tour : " + tourInt);
+               tourInt ++;
+               System.out.println("Tour : " + tourInt);
+               
+             
             }
         });
+		
+		
 	}
 
 	
