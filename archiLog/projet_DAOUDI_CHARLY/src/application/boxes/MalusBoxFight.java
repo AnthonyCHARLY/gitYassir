@@ -30,7 +30,7 @@ public class MalusBoxFight extends DecoratorBox{
 	public void resetArmy() {
 		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
 		army.addUnit(unitsFactory.infantryUnit("Ai:: infantry"));
-		army.addUnit(unitsFactory.riderUnit("Ai:: infantry"));
+		army.addUnit(unitsFactory.riderUnit("Ai:: rider"));
 	}
 	
 	

@@ -1,7 +1,18 @@
 package application.core;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import application.boxes.BonusBoxEquipment;
+import application.boxes.BonusBoxForward;
+import application.boxes.BonusBoxUnit;
+import application.boxes.FinalBossBox;
+import application.boxes.MalusBoxBack;
+import application.boxes.MalusBoxFight;
+import application.boxes.MalusBoxUnit;
+import application.boxes.NeutralBox;
 import soldier.ages.AgeFutureFactory;
 import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
@@ -10,11 +21,16 @@ import soldier.core.UnitGroup;
 public class Board implements BoardItf{
 	
 	private Player p1, p2, currentPlayer;
-	private List<Box> boxes;
+	private Map<Integer,Box> boxes;
 	private static Board _instance = null;
 	private static final int MAX_BOXES = 20;
+	private boolean isGameOver;
 	
 	private Board(String p1Name, String p2Name) {
+		
+		boxes = new HashMap<Integer,Box>();
+		
+		isGameOver = false;
 		
 		AgeAbstractFactory FutureFactory = new AgeFutureFactory();
 		AgeAbstractFactory MiddleFactory = new AgeMiddleFactory();
@@ -52,7 +68,10 @@ public class Board implements BoardItf{
 		
 		if(p1.getPosition() == p2.getPosition()) { fight(p1.getArmy(),p2.getArmy()); }
 		
-		boxes.get(currentPlayer.getPosition()).effect(this);
+		if(boxes.keySet().contains(currentPlayer.getPosition()))
+			boxes.get(currentPlayer.getPosition()).effect(this);
+		else
+			boxes.get(-1).effect(this);
 		
 		endTurn();
 	}
@@ -65,6 +84,10 @@ public class Board implements BoardItf{
 		if(!p2.getArmy().alive()) {
 			p2.backCheckpoint();
 		}
+		
+		if(currentPlayer.getPosition() == MAX_BOXES)
+			isGameOver = true;
+		
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
 	
@@ -93,6 +116,41 @@ public class Board implements BoardItf{
 	
 	public void makeBoxes() {
 		
+		Box neutralBox = new NeutralBox();
+		
+		Box malus1 = new MalusBoxBack(new NeutralBox());
+		Box malus2 = new MalusBoxUnit(new NeutralBox());
+		Box malus3 = new MalusBoxUnit(new MalusBoxBack(new NeutralBox()));
+		Box malus4 = new MalusBoxFight(new NeutralBox());
+		
+		Box bonus1 = new BonusBoxForward(new NeutralBox());
+		Box bonus2 = new BonusBoxUnit(new NeutralBox());
+		Box bonus3 = new BonusBoxUnit(new MalusBoxBack(new NeutralBox()));
+		Box bonus4 = new BonusBoxEquipment(new BonusBoxUnit(new BonusBoxForward(new NeutralBox())));
+		
+		Box finalBox = new FinalBossBox(new NeutralBox());
+		
+		List<Box> speBoxes = new ArrayList<Box>();
+		speBoxes.add(bonus1);
+		speBoxes.add(bonus2);
+		speBoxes.add(bonus3);
+		speBoxes.add(bonus4);
+		speBoxes.add(malus1);
+		speBoxes.add(malus2);
+		speBoxes.add(malus3);
+		speBoxes.add(malus4);
+		
+		boxes.put(-1, neutralBox);
+		
+		for(Box b : speBoxes) {
+			int order = (int)Math.random() * (MAX_BOXES-1);
+			while(boxes.keySet().contains(order))
+				order = (int)Math.random() * (MAX_BOXES-1);
+			boxes.put(order,b);
+		}
+		
+		boxes.put(MAX_BOXES-1, finalBox);
+		
 	}
 	
 	@Override
@@ -106,6 +164,19 @@ public class Board implements BoardItf{
 		b.buildMessage(); //turn infromations 
 		
 	}
+
+	@Override
+	public void endGame() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isGameOver() {
+		// TODO Auto-generated method stub
+		return isGameOver;
+	}
+	
 	
 	
 	

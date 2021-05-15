@@ -18,4 +18,8 @@ public interface BoardItf {
 	
 	public void boardBuilder(Builder b);
 	
+	public void endGame();
+	
+	public boolean isGameOver();
+	
 }
