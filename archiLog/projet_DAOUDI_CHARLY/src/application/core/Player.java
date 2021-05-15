@@ -108,5 +108,4 @@ public class Player implements PlayerItf, Cloneable{
 		this.position = pm.save.position;		
 	}
 
-	
 }
