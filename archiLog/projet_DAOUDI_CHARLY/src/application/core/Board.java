@@ -13,6 +13,7 @@ import application.boxes.MalusBoxBack;
 import application.boxes.MalusBoxFight;
 import application.boxes.MalusBoxUnit;
 import application.boxes.NeutralBox;
+import application.boxes.SaveBox;
 import soldier.ages.AgeFutureFactory;
 import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
@@ -118,6 +119,8 @@ public class Board implements BoardItf{
 		
 		Box neutralBox = new NeutralBox();
 		
+		Box saveBox = new SaveBox(new NeutralBox());
+		
 		Box malus1 = new MalusBoxBack(new NeutralBox());
 		Box malus2 = new MalusBoxUnit(new NeutralBox());
 		Box malus3 = new MalusBoxUnit(new MalusBoxBack(new NeutralBox()));
@@ -141,6 +144,10 @@ public class Board implements BoardItf{
 		speBoxes.add(malus4);
 		
 		boxes.put(-1, neutralBox);
+		
+		boxes.put(5, saveBox);
+		boxes.put(10, saveBox);
+		boxes.put(15, saveBox);
 		
 		for(Box b : speBoxes) {
 			int order = (int)Math.random() * (MAX_BOXES-1);
