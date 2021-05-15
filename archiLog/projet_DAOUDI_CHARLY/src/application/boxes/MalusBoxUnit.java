@@ -4,7 +4,7 @@ import application.core.BoardItf;
 import application.core.Box;
 import application.core.DecoratorBox;
 
-public class MalusBoxUnit extends DecoratorBox{
+public class MalusBoxUnit extends MalusBox{
 
 	public MalusBoxUnit(Box decoratorbox) {
 		super(decoratorbox);

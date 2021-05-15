@@ -6,4 +6,6 @@ public interface Box {
  
  void description();
  
+ String getType();
+ 
 }

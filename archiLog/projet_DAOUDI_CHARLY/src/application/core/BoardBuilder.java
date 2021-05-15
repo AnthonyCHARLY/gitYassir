@@ -128,7 +128,6 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
 	public void buildPlayers() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
