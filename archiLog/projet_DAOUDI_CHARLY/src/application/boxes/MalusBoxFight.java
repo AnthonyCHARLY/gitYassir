@@ -14,19 +14,25 @@ public class MalusBoxFight extends DecoratorBox{
 	public MalusBoxFight(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
-		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
-		
-		army.addUnit(unitsFactory.infantryUnit("Ai:: infantry"));
-		army.addUnit(unitsFactory.riderUnit("Ai:: infantry"));
+		resetArmy();
 		
 	}
 	
+	@Override
 	public void effect(BoardItf b) {
 		
 		box.effect(b);
 		b.fight(b.getCurrentPlayer().getArmy(), army);
+		if(!army.alive()) {resetArmy();}
 		
 	}
+	
+	public void resetArmy() {
+		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
+		army.addUnit(unitsFactory.infantryUnit("Ai:: infantry"));
+		army.addUnit(unitsFactory.riderUnit("Ai:: infantry"));
+	}
+	
 	
 	
 
