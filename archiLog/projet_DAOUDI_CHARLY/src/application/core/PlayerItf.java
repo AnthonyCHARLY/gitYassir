@@ -21,8 +21,6 @@ public interface PlayerItf {
 	
 	public void addAttackWeapon();
 	
-	public void removeEquipment();
-	
 	public void forward(int value);
 	
 	public void back(int value);

@@ -1,76 +1,58 @@
 package application.core;
 
-import java.awt.Button;
-
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.scene.Group;
 
 public class BoardBuilder extends Application implements Builder {
 	
+	private Group root = new Group();
+	private Button buttonde;
+	private Button buttonnotify;
+	
 	@Override
-    public void start(Stage primaryStage) {/**
-		// Also add a text which will be centered
-        primaryStage.setTitle("Hello JavaFX");
-        
-        HBox root = new HBox();
-        // JavaFX uses Scenes for content
-        Scene scene = new Scene(root, 400, 400);
-
-        // Scenes are displayed by a Stage
-        primaryStage.setTitle("Jeu de l'oie ");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-        
-     //  root.setSpacing(10);
-        root.setPadding(new Insets(15,20, 10,10));
-        
-        // Button 1
-        Button button1= new Button("Button1");
-        
+    public void start(Stage primaryStage) {
 		
-        // Build a first grid
-        GridPane grid1 = new GridPane();
-        grid1.setGridLinesVisible(true); // Useful for debug
-
-        // Create and add text to the grid
-        Text header = new Text("Number one");
-        grid1.add(header, 0, 0);
-
-        // This text is adjusted through CSS
-        Text another = new Text("Number two");
-        another.setStyle("-fx-font: 24 arial;");
-        grid1.add(another, 1, 1);
-
-        // Build a second grid
-        GridPane grid2 = new GridPane();
-        grid2.setGridLinesVisible(true);
-
-        // Adjust the grid style
-        grid2.setHgap(10);
-        grid2.setVgap(10);
-        grid2.setPadding(new Insets(0, 10, 0, 10));
-
-        // Simpler API only for rows
-        grid2.addRow(0, new Text("Row one"));
-        grid2.addRow(1, new Text("Row two"));
-        grid2.addColumn(1, new Text("Col three"));
-
-        // Put the two grids in a column
-        VBox col = new VBox();
-        col.setAlignment(Pos.CENTER);
-        col.getChildren().add(grid1);
-        col.getChildren().add(grid2);
+		 buildBoard();
+		 buildUtil();
+		 
+		 Scene scenegraph = new Scene (root,600,400) ;
+		 primaryStage.setScene (scenegraph) ;
+		 primaryStage.setTitle ("Jeu de l'oie");
+		 primaryStage.show ();
+		 
         
-        **/
     }
 
     public static void main(String[] args) {
@@ -86,16 +68,36 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
 	public void buildBoard() {
 		// TODO Auto-generated method stub
-		
+		for(int i=0; i<6; i++)
+		    for(int j=0; j<6; j++)
+		    {
+		      Rectangle rectangle = new Rectangle(50 + 50*i, 50+50*j, 50, 50);
+		      rectangle.setFill(Color.TRANSPARENT);
+		      rectangle.setStroke(Color.BLACK);
+		     // r.setOnMouseClicked(this);
+		      root.getChildren().add(rectangle);
+		    }
 	}
 
 	@Override
 	public void buildUtil() {
 		// TODO Auto-generated method stub
-		
-		Button buttongame = new Button("Jouer");
-		
-		
+		 buttonde= new Button();
+		 buttonde.setText("Lancer le dé");
+		 
+		 
+		 Label tour= new Label("Tour 1");
+		 tour.setTextFill(Color.BLACK);
+		 tour.setLayoutX(500);
+		 tour.setVisible(true);
+		 
+		 Label victory= new Label(" Victoire");
+		 victory.setTextFill(Color.BLACK);
+		 victory.setLayoutX(300);
+		 victory.setVisible(false);
+		 
+		 
+		 root.getChildren().addAll(buttonde,tour,victory);
 	}
 
 	@Override
@@ -113,7 +115,13 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
 	public void buildMessage() {
 		// TODO Auto-generated method stub
-		
+		buttonde.setOnAction(new EventHandler<ActionEvent>() {
+			 
+            @Override
+            public void handle(ActionEvent event) {
+                //
+            }
+        });
 	}
 
 	
