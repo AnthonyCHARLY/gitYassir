@@ -20,7 +20,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
+import soldier.ages.AgeFutureFactory;
+import soldier.ages.AgeMiddleFactory;
+import soldier.core.AgeAbstractFactory;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -34,6 +36,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Group;
+
+import application.core.Board;
 
 public class BoardBuilder extends Application implements Builder {
 	
@@ -49,11 +53,22 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
     public void start(Stage primaryStage) {
 		
+		AgeAbstractFactory FutureFactory = new AgeFutureFactory();
+		AgeAbstractFactory MiddleFactory = new AgeMiddleFactory();
+		
+		Player p1 = new Player("yassir", FutureFactory);
+		Player p2 = new Player("anthony", MiddleFactory);
+		
+		p1.addInfantryUnit();
+		p1.addRiderUnit();
+		p2.addInfantryUnit();
+		p2.addRiderUnit();
+		
 		 buildBoard();
-		 buildUtil();
+		 buildUtil(p1, p2);
 		 buildMessage();
 		 
-		 Scene scenegraph = new Scene (root,600,400) ;
+		 Scene scenegraph = new Scene (root,700,400) ;
 		 primaryStage.setScene (scenegraph) ;
 		 primaryStage.setTitle ("Jeu de l'oie");
 		 primaryStage.show ();
@@ -93,7 +108,7 @@ public class BoardBuilder extends Application implements Builder {
 	}
 
 	@Override
-	public void buildUtil() {
+	public void buildUtil(Player p1, Player p2) {
 		// TODO Auto-generated method stub
 		 buttonde= new Button();
 		 buttonde.setText("Lancer le dé");
@@ -104,13 +119,13 @@ public class BoardBuilder extends Application implements Builder {
 		 tour.setLayoutX(500);
 		 tour.setVisible(true);
 		 
-		 descriptionp1= new Label("Description P1: ");
+		 descriptionp1= new Label("Description " + p1.getName() +": \n Puissance " + p1.getArmy().strike()+" Point de vie"+p1.getArmy().getHealthPoints());
 		 descriptionp1.setTextFill(Color.BLACK);
 		 descriptionp1.setLayoutX(400);
 		 descriptionp1.setLayoutY(100);
 		 descriptionp1.setVisible(true);
 		 
-		 descriptionp2= new Label("Description P2: ");
+		 descriptionp2= new Label("Description " + p2.getName() +": \n Puissance " + p2.getArmy().strike()+" Point de vie"+p2.getArmy().getHealthPoints());
 		 descriptionp2.setTextFill(Color.BLACK);
 		 descriptionp2.setLayoutX(400);
 		 descriptionp2.setLayoutY(200);
@@ -121,12 +136,12 @@ public class BoardBuilder extends Application implements Builder {
 		 victory.setLayoutX(300);
 		 victory.setVisible(false);
 		 
-		 
 		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
+		
 	}
 
 	@Override
-	public void buildPlayers() {
+	public void buildPlayers(Player p1,Player p2) {
 		// TODO Auto-generated method stub
 		
 	}
