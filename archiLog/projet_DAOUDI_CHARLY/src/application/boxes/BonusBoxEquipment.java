@@ -15,7 +15,6 @@ public class BonusBoxEquipment extends DecoratorBox{
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
 		box.effect(b);
-		
 		b.getCurrentPlayer().addAttackWeapon();
 	}
 
