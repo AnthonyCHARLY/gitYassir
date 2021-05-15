@@ -1,5 +1,7 @@
 package application.core;
 
+import java.util.Iterator;
+
 import soldier.core.AgeAbstractFactory;
 import soldier.core.Unit;
 import soldier.core.UnitGroup;
@@ -44,6 +46,12 @@ public class Player implements PlayerItf, Cloneable{
 	public void addRiderUnit() {
 		army.addUnit(armyFactory.infantryUnit(name + ":: rider"));
 	}
+	
+	@Override
+	public void removeUnit() {
+		Iterator<Unit> itUnit = army.subUnits();
+		if(itUnit.hasNext()) { army.removeUnit(itUnit.next());}
+	}
 
 	@Override
 	public void addDefenseWeapon() {
@@ -56,16 +64,10 @@ public class Player implements PlayerItf, Cloneable{
 	}
 
 	@Override
-	public void removeUnit(Unit u) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int getPosition() {
 		return position;
 	}
-
+	
 	@Override
 	public void forward(int value) {
 		position += value;

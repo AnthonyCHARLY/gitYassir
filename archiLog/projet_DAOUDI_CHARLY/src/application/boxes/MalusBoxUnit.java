@@ -15,6 +15,7 @@ public class MalusBoxUnit extends DecoratorBox{
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
 		box.effect(b);
+		b.getCurrentPlayer().removeUnit();
 	}
 
 	public void description() {

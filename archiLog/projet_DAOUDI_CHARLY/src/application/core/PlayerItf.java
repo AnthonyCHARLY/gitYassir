@@ -15,11 +15,13 @@ public interface PlayerItf {
 	
 	public void addRiderUnit();
 	
+	public void removeUnit();
+	
 	public void addDefenseWeapon();
 	
 	public void addAttackWeapon();
 	
-	public void removeUnit(Unit u);
+	public void removeEquipment();
 	
 	public void forward(int value);
 	
