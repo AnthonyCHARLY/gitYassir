@@ -1,16 +1,16 @@
 package application;
 
-public class MalusBoxRemoveUnit extends DecoratorBox{
+public class MalusBoxUnit extends DecoratorBox{
 
-	public MalusBoxRemoveUnit(Box decoratorbox) {
+	public MalusBoxUnit(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public void effect(PlayerItf player) {
+	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		box.effect(player);
+		box.effect(b);
 	}
 
 	public void description() {

@@ -16,9 +16,9 @@ public abstract class DecoratorBox implements Box {
 		this.box = box;
 	}
 	
-	public void effect(Player player) {
+	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		box.effect(player);
+		box.effect(b);
 	}
 
 	public void description() {

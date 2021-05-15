@@ -13,10 +13,10 @@ public class BonusBoxUnit extends DecoratorBox{
 	}
 	
 	@Override
-	public void effect(PlayerItf player) {
+	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		box.effect(player);
-		player.addRiderUnit();
+		box.effect(b);
+		b.getCurrentPlayer().addRiderUnit();
 		
 	}
 

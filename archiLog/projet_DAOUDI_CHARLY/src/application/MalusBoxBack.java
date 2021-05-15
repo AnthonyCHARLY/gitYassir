@@ -8,9 +8,10 @@ public class MalusBoxBack extends DecoratorBox{
 	}
 	
 	@Override
-	public void effect(PlayerItf player) {
+	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		box.effect(player);
+		box.effect(b);
+		b.getCurrentPlayer().back((int)Math.random() * 3 + 1);
 	}
 
 	public void description() {

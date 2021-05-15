@@ -7,11 +7,12 @@ import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
 import soldier.core.UnitGroup;
 
-public class Board {
+public class Board implements BoardItf{
 	
 	private Player p1, p2, currentPlayer;
 	private List<Box> boxes;
 	private static Board _instance = null;
+	private static final int MAX_BOXES = 20;
 	
 	private Board(String p1Name, String p2Name) {
 		
@@ -29,37 +30,68 @@ public class Board {
 		currentPlayer = p1;
 	}
 	
-	public Board getInstance(String p1Name, String p2Name) {
+	@Override
+	public BoardItf getInstance(String p1Name, String p2Name) {
+		
 		if(_instance == null)
 			_instance = new Board(p1Name, p2Name);
 		return _instance;
+		
 	}
 	
+	@Override
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	@Override
 	public void turn() {
+		
 		int dice = (int)Math.random() * 6 + 1;
 		currentPlayer.forward(dice);
 		
-		if(p1.getPosition() == p2.getPosition()) { fight(); }
+		if(p1.getPosition() == p2.getPosition()) { fight(p1.getArmy(),p2.getArmy()); }
 		
-		boxes.get(currentPlayer.getPosition()).effect(currentPlayer);
+		boxes.get(currentPlayer.getPosition()).effect(this);
 		
+		endTurn();
+	}
+	
+	@Override
+	public void endTurn() {
+		if(!p1.getArmy().alive()) {
+			p1.backCheckpoint();
+		}
+		if(!p2.getArmy().alive()) {
+			p2.backCheckpoint();
+		}
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
 	}
 	
-	public void fight() {
-		double order = Math.random();
-		UnitGroup team1 = order < 0.5 ? p1.getArmy() : p2.getArmy();
-		UnitGroup team2 = (team1 == p1.getArmy()) ? p2.getArmy() : p1.getArmy();
+	@Override
+	public void fight(UnitGroup team1, UnitGroup team2) {
+		
 		while(team1.alive() && team2.alive()) {
-			float st1 = team1.strike();
-			team2.parry(st1);
-			float st2 = team2.strike();
-			team1.parry(st2);
+			
+			double order = Math.random();
+			
+			if(order < 0.5) {
+				float st1 = team1.strike();
+				team2.parry(st1);
+				float st2 = team2.strike();
+				team1.parry(st2);
+			}
+			else {
+				float st2 = team2.strike();
+				team1.parry(st2);
+				float st1 = team1.strike();
+				team2.parry(st1);
+			}
 		}
-		Player loser = p1.getArmy().alive() ? p2 : p1;
-		loser.backCheckpoint();
+		
 	}
 	
+	@Override
 	public void boardBuilder(Builder b) {
 		
 		b.buildHeader(); // haut de 

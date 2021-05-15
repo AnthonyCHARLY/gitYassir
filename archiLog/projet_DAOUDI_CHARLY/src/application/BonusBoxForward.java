@@ -2,20 +2,20 @@ package application;
 
 import java.util.Random;
 
-public class BonusBoxForWard extends DecoratorBox{
+public class BonusBoxForward extends DecoratorBox{
 
-	public BonusBoxForWard(Box decoratorbox) {
+	public BonusBoxForward(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
-	public void effect(PlayerItf player) {
+	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
 		int bonus =2;
-		box.effect(player);
+		box.effect(b);
 		Random rand = null;
-		player.forward(rand.nextInt((5 - 3) + 1) + 3);
+		b.getCurrentPlayer().forward((int)Math.random() * 3 + 1);
 		
 	}
 
