@@ -38,6 +38,12 @@ public class FinalBossBox extends DecoratorBox {
 		b.fight(b.getCurrentPlayer().getArmy(), army);
 		if(!army.alive()) {b.endGame();}
 	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Boss";
+	}
 	
 	
 

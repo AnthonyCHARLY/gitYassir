@@ -143,7 +143,6 @@ public class BoardBuilder extends Application implements Builder {
 	@Override
 	public void buildPlayers(Player p1,Player p2) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

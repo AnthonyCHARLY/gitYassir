@@ -6,7 +6,7 @@ public interface BoardItf {
 	
 	public BoardItf getInstance(String p1Name, String p2Name);
 	
-	public Player getCurrentPlayer();
+	public Player getCurrentPlayer(); 
 	
 	public void turn();
 	

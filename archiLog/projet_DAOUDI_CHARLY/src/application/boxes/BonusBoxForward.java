@@ -6,7 +6,7 @@ import application.core.BoardItf;
 import application.core.Box;
 import application.core.DecoratorBox;
 
-public class BonusBoxForward extends DecoratorBox{
+public class BonusBoxForward extends BonusBox{
 
 	public BonusBoxForward(Box decoratorbox) {
 		super(decoratorbox);

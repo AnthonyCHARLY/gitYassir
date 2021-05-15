@@ -15,10 +15,11 @@ import javafx.stage.Stage;
 
 
 public class Main extends Application {
+	
 	@Override
     public void start(Stage primaryStage) {
 
-        // Build a first grid
+        // Build a first grid	
         GridPane grid1 = new GridPane();
         grid1.setGridLinesVisible(true); // Useful for debug
 

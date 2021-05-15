@@ -14,8 +14,14 @@ public class NeutralBox implements Box{
 	@Override
 	public void description() {
 		// TODO Auto-generated method stub
-		System.out.println(" Je peux rien faire ");
+		System.out.println(" Nothing ");
 		
+	}
+
+	@Override
+	public String getType() {
+		// TODO Auto-generated method stub
+		return "Neutral";
 	}
 
 }

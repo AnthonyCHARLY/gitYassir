@@ -7,7 +7,7 @@ import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
 import soldier.core.UnitGroup;
 
-public class MalusBoxFight extends DecoratorBox{
+public class MalusBoxFight extends MalusBox{
 	
 	private UnitGroup army;
 	
@@ -31,6 +31,12 @@ public class MalusBoxFight extends DecoratorBox{
 		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
 		army.addUnit(unitsFactory.infantryUnit("Ai:: infantry"));
 		army.addUnit(unitsFactory.riderUnit("Ai:: rider"));
+	}
+
+	@Override
+	public void description() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

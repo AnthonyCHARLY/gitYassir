@@ -4,7 +4,7 @@ import application.core.BoardItf;
 import application.core.Box;
 import application.core.DecoratorBox;
 
-public class BonusBoxEquipment extends DecoratorBox{
+public class BonusBoxEquipment extends BonusBox{
 
 	public BonusBoxEquipment(Box decoratorbox) {
 		super(decoratorbox);
