@@ -1,10 +1,12 @@
-package application;
+package application.boxes;
 
-import java.util.Random;
+import application.core.BoardItf;
+import application.core.Box;
+import application.core.DecoratorBox;
 
-public class BonusBoxForward extends DecoratorBox{
+public class BonusBoxEquipment extends DecoratorBox{
 
-	public BonusBoxForward(Box decoratorbox) {
+	public BonusBoxEquipment(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
@@ -12,11 +14,9 @@ public class BonusBoxForward extends DecoratorBox{
 	@Override
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		int bonus =2;
 		box.effect(b);
-		Random rand = null;
-		b.getCurrentPlayer().forward((int)Math.random() * 3 + 1);
 		
+		b.getCurrentPlayer().addAttackWeapon();
 	}
 
 	public void description() {

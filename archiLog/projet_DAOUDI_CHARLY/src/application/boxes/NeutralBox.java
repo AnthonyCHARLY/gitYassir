@@ -1,4 +1,7 @@
-package application;
+package application.boxes;
+
+import application.core.BoardItf;
+import application.core.Box;
 
 public class NeutralBox implements Box{
 

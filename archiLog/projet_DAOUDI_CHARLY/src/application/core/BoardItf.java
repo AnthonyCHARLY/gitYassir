@@ -1,4 +1,4 @@
-package application;
+package application.core;
 
 import soldier.core.UnitGroup;
 
@@ -13,6 +13,8 @@ public interface BoardItf {
 	public void endTurn();
 	
 	public void fight(UnitGroup team1, UnitGroup team2);
+	
+	public void makeBoxes();
 	
 	public void boardBuilder(Builder b);
 	

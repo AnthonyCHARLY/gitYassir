@@ -1,7 +1,10 @@
-package application;
+package application.boxes;
 
 import java.util.Random;
 
+import application.core.BoardItf;
+import application.core.Box;
+import application.core.DecoratorBox;
 import soldier.core.Unit;
 import soldier.units.UnitHorseMan;
 

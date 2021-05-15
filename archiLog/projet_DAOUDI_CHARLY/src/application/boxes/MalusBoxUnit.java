@@ -1,8 +1,12 @@
-package application;
+package application.boxes;
 
-public class BonusBoxEquipment extends DecoratorBox{
+import application.core.BoardItf;
+import application.core.Box;
+import application.core.DecoratorBox;
 
-	public BonusBoxEquipment(Box decoratorbox) {
+public class MalusBoxUnit extends DecoratorBox{
+
+	public MalusBoxUnit(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
@@ -11,8 +15,6 @@ public class BonusBoxEquipment extends DecoratorBox{
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
 		box.effect(b);
-		
-		b.getCurrentPlayer().addAttackWeapon();
 	}
 
 	public void description() {

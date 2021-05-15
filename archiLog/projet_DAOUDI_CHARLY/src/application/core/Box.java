@@ -1,4 +1,4 @@
-package application;
+package application.core;
 
 public interface Box {
 	

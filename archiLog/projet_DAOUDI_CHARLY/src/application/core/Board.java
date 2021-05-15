@@ -1,4 +1,4 @@
-package application;
+package application.core;
 
 import java.util.List;
 
@@ -88,6 +88,10 @@ public class Board implements BoardItf{
 				team2.parry(st1);
 			}
 		}
+		
+	}
+	
+	public void makeBoxes() {
 		
 	}
 	

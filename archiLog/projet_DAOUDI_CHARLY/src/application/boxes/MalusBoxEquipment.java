@@ -1,8 +1,12 @@
-package application;
+package application.boxes;
 
-public class MalusBoxBack extends DecoratorBox{
+import application.core.BoardItf;
+import application.core.Box;
+import application.core.DecoratorBox;
 
-	public MalusBoxBack(Box decoratorbox) {
+public class MalusBoxEquipment extends DecoratorBox{
+
+	public MalusBoxEquipment(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
 	}
@@ -11,7 +15,6 @@ public class MalusBoxBack extends DecoratorBox{
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
 		box.effect(b);
-		b.getCurrentPlayer().back((int)Math.random() * 3 + 1);
 	}
 
 	public void description() {

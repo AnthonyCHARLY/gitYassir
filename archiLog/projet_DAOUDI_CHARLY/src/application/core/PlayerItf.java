@@ -1,4 +1,4 @@
-package application;
+package application.core;
 
 import soldier.core.Unit;
 import soldier.core.UnitGroup;
