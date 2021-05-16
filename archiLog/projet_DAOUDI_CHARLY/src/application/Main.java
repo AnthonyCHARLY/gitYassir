@@ -1,6 +1,7 @@
 package application;
 	
 import javafx.application.Application;
+
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -12,56 +13,127 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import application.core.Board;
+import application.core.BoardItf;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import soldier.ages.AgeFutureFactory;
+import soldier.ages.AgeMiddleFactory;
+import soldier.core.AgeAbstractFactory;
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.scene.Group;
 
 
 public class Main extends Application {
-	
+	private Group root = new Group();
+	private Button buttonde;
+	private Button buttonnotify;
+	private Label tour;
+	private Label descriptionp1;
+	private Label descriptionp2;
+	private Label victory;
+	private int tourInt=1;
 	@Override
     public void start(Stage primaryStage) {
-
-        // Build a first grid	
-        GridPane grid1 = new GridPane();
-        grid1.setGridLinesVisible(true); // Useful for debug
-
-        // Create and add text to the grid
-        Text header = new Text("Number one");
-        grid1.add(header, 0, 0);
-
-        // This text is adjusted through CSS
-        Text another = new Text("Number two");
-        another.setStyle("-fx-font: 24 arial;");
-        grid1.add(another, 1, 1);
-
-        // Build a second grid
-        GridPane grid2 = new GridPane();
-        grid2.setGridLinesVisible(true);
-
-        // Adjust the grid style
-        grid2.setHgap(10);
-        grid2.setVgap(10);
-        grid2.setPadding(new Insets(0, 10, 0, 10));
-
-        // Simpler API only for rows
-        grid2.addRow(0, new Text("Row one"));
-        grid2.addRow(1, new Text("Row two"));
-        grid2.addColumn(1, new Text("Col three"));
-
-        // Put the two grids in a column
-        VBox col = new VBox();
-        col.setAlignment(Pos.CENTER);
-        col.getChildren().add(grid1);
-        col.getChildren().add(grid2);
-
-        // Also add a text which will be centered
-        col.getChildren().add(new Text("Hello JavaFX"));
-
-        // JavaFX uses Scenes for content
-        Scene scene = new Scene(col, 200, 200);
-
-        // Scenes are displayed by a Stage
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+		BoardItf board = null;
+		board.getInstance("yassir", "anthony");
+		
+		int i,j=0;
+		for( i=0; i<6; i++)
+		    for( j=0; j<6; j++)
+		    {
+		      Rectangle rectangle = new Rectangle(60 + 60*i, 60+60*j, 60, 60);
+		      rectangle.setFill(Color.TRANSPARENT);
+		      rectangle.setStroke(Color.BLUE);
+		      
+		      rectangle.setArcHeight(20.0d);
+		       rectangle.setArcWidth(20.0d);
+		     // r.setOnMouseClicked(this);
+		       if((i== 0 ) && (j == 0 )) {
+		    	   	  rectangle.setAccessibleText("yassir, anthony");
+			    	  root.getChildren().add(rectangle);
+		       }
+		       else if((i== 0 ) || (j == 0 )|| (j == 5 ) || (i == 5 )) {
+		    	  root.getChildren().add(rectangle);
+		      }
+		      
+		      
+		    }
+		
+		buttonde= new Button();
+		 buttonde.setText("Lancer le dé");
+		 
+		 
+		 tour= new Label("Tour : 1");
+		 tour.setTextFill(Color.BLACK);
+		 tour.setLayoutX(500);
+		 tour.setVisible(true);
+		 
+		 descriptionp1= new Label("Description " + board.getPlayer1().getName()+": \n Puissance \n " + board.getPlayer1().getArmy().strike()+" Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
+		 descriptionp1.setTextFill(Color.BLACK);
+		 descriptionp1.setLayoutX(500);
+		 descriptionp1.setLayoutY(100);
+		 descriptionp1.setVisible(true);
+		 
+		 descriptionp2= new Label("Description " + board.getPlayer2().getName() +": \n Puissance \n" + board.getPlayer2().getArmy().strike()+" Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
+		 descriptionp2.setTextFill(Color.BLACK);
+		 descriptionp2.setLayoutX(500);
+		 descriptionp2.setLayoutY(200);
+		 descriptionp2.setVisible(true);
+		 
+		 victory= new Label(" Victoire");
+		 victory.setTextFill(Color.BLACK);
+		 victory.setLayoutX(300);
+		 victory.setVisible(false);
+		 
+		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
+		
+		 buttonde.setOnAction(new EventHandler<ActionEvent>() {
+			 
+	            @Override
+	            public void handle(ActionEvent event) {
+	               tour.setText("Tour : " + tourInt);
+	               tourInt ++;
+	               System.out.println("Tour : " + tourInt);
+	               
+	             
+	            }
+	        });
+		
+		Scene scenegraph = new Scene (root,750,500) ;
+		 primaryStage.setScene (scenegraph) ;
+		 primaryStage.setTitle ("Jeu de l'oie");
+		 primaryStage.show ();
+		
     }
 
     public static void main(String[] args) {

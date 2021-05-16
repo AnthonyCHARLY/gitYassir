@@ -104,12 +104,10 @@ public class BoardBuilder extends Application implements Builder {
 		    	   	  rectangle.setAccessibleText("yassir, anthony");
 			    	  root.getChildren().add(rectangle);
 		       }
-		       else if((i== 0 ) || (j == 0 )) {
+		       else if((i== 0 ) || (j == 0 )|| (j == 5 ) || (i == 5 )) {
 		    	  root.getChildren().add(rectangle);
 		      }
-		      else if((j == 5 ) || (i == 5 )){
-			      root.getChildren().add(rectangle);
-			  }
+		      
 		      
 		    }
 	}
