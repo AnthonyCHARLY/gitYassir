@@ -28,6 +28,7 @@ public class MalusBoxFight extends MalusBox{
 	}
 	
 	public void resetArmy() {
+		army = new UnitGroup("Ai:: group");
 		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
 		army.addUnit(unitsFactory.infantryUnit("Ai:: infantry"));
 		army.addUnit(unitsFactory.riderUnit("Ai:: rider"));

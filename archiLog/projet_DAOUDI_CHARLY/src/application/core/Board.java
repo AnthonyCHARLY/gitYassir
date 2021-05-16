@@ -9,6 +9,7 @@ import application.boxes.BonusBoxEquipment;
 import application.boxes.BonusBoxForward;
 import application.boxes.BonusBoxUnit;
 import application.boxes.FinalBossBox;
+import application.boxes.MalusBox;
 import application.boxes.MalusBoxBack;
 import application.boxes.MalusBoxFight;
 import application.boxes.MalusBoxUnit;
@@ -34,17 +35,20 @@ public class Board implements BoardItf{
 		
 		isGameOver = false;
 		
+		
 		AgeAbstractFactory FutureFactory = new AgeFutureFactory();
 		AgeAbstractFactory MiddleFactory = new AgeMiddleFactory();
 		
+		
 		p1 = new Player(p1Name, FutureFactory);
 		p2 = new Player(p2Name, MiddleFactory);
+		
 		
 		p1.addInfantryUnit();
 		p1.addRiderUnit();
 		p2.addInfantryUnit();
 		p2.addRiderUnit();
-		
+				
 		currentPlayer = p1;
 	}
 	
@@ -150,10 +154,13 @@ public class Board implements BoardItf{
 		boxes.put(10, saveBox);
 		boxes.put(15, saveBox);
 		
+		System.out.println("quoi");
+		
 		for(Box b : speBoxes) {
-			int order = (int)Math.random() * (MAX_BOXES-2 + 1);
-			while(boxes.keySet().contains(order))
-				order = (int)Math.random() * (MAX_BOXES-2 + 1);
+			int order = (int)(Math.random() * (MAX_BOXES-2) + 1);
+			while(boxes.keySet().contains(order)) {
+				order = (int)(Math.random() * (MAX_BOXES-2) + 1);
+			}
 			boxes.put(order,b);
 		}
 		

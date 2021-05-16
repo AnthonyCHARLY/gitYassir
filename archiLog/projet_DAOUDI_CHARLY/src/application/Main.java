@@ -117,7 +117,10 @@ public class Main extends Application {
 		       
 		       else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
 		    	   
-		    	   String type = board.getBoxes().get(indiceMap).getType();
+		    	   
+		    	   //String type = board.getBoxes().get(indiceMap).getType();
+		    	   //System.out.println(type);
+		    	   // type = Neutral/Malus/Bonnus/Boss
 		    	   root.getChildren().add(rectangle);
 		    	   mapRectangle.put(indiceMap, rectangle);
 		    	   indiceMap++;
