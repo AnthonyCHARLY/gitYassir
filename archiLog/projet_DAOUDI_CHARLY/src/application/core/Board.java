@@ -48,7 +48,7 @@ public class Board implements BoardItf{
 	}
 	
 	@Override
-	public BoardItf getInstance(String p1Name, String p2Name) {
+	public final  BoardItf getInstance(String p1Name, String p2Name) {
 		
 		if(_instance == null)
 			_instance = new Board(p1Name, p2Name);
@@ -182,6 +182,18 @@ public class Board implements BoardItf{
 	public boolean isGameOver() {
 		// TODO Auto-generated method stub
 		return isGameOver;
+	}
+
+	@Override
+	public Player getPlayer1() {
+		// TODO Auto-generated method stub
+		return p1;
+	}
+
+	@Override
+	public Player getPlayer2() {
+		// TODO Auto-generated method stub
+		return p2;
 	}
 	
 	
