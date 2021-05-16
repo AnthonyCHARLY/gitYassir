@@ -56,6 +56,7 @@ import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class Main extends Application {
 	
@@ -74,14 +75,15 @@ public class Main extends Application {
 		
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
-		Image imagePlayer1 = new Image("/smile.png",50,50,true,true);
-		 Image imagePlayer2 = new Image("/smileyas.png");
+		 Image imagePlayer1 = new Image("/smile.png",20,20,true,true);
+		 Image imagePlayer2 = new Image("/smileyas.png",20,20,true,true);
 		 
 		 
 		 ImageInput imageInput = new ImageInput();
 
 	     //Setting the position of the image
-	      
+		 ImageView iv1 = new ImageView(imagePlayer1);
+		 ImageView iv2 = new ImageView(imagePlayer2);
 		 
 		 
 		int indiceMap=0;
@@ -97,16 +99,15 @@ public class Main extends Application {
 		       rectangle.setArcWidth(20.0d);
 		     // r.setOnMouseClicked(this);
 		       if((i== 0 ) && (j == 0 )) {
-		    	   	  //rectangle.setEffect(imageInput);
-		    	   imageInput.setX(rectangle.getX());
-		 	      imageInput.setY(rectangle.getY());
-		 	      
-
-		 	     //Setting source for image input
-		 	      imageInput.setSource(imagePlayer1);
-		 	     rectangle.setEffect(imageInput);
-			    	  root.getChildren().add(rectangle);
+		    	 
+		 	     iv1.setX(rectangle.getX()+30);
+		 	    iv1.setY(rectangle.getY()+30);
+		 	    
+		 	   iv2.setX(rectangle.getX());
+		 	    iv2.setY(rectangle.getY());
+		 	    
 			    	  
+			    	  root.getChildren().addAll(rectangle,iv1,iv2);
 		       }
 		       else if((i== 0 ) || (j == 0 )|| (j == 5 ) || (i == 5 )) {
 		    	  root.getChildren().add(rectangle);
