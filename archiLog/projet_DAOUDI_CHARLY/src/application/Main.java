@@ -75,6 +75,7 @@ public class Main extends Application {
 		
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
+
 		 Image imagePlayer1 = new Image("/smile.png",20,20,true,true);
 		 Image imagePlayer2 = new Image("/smileyas.png",20,20,true,true);
 		 
@@ -84,6 +85,7 @@ public class Main extends Application {
 	     //Setting the position of the image
 		 ImageView iv1 = new ImageView(imagePlayer1);
 		 ImageView iv2 = new ImageView(imagePlayer2);
+
 		 
 		 
 		int indiceMap=0;
@@ -99,6 +101,7 @@ public class Main extends Application {
 		       rectangle.setArcWidth(20.0d);
 		     // r.setOnMouseClicked(this);
 		       if((i== 0 ) && (j == 0 )) {
+
 		    	 
 		 	     iv1.setX(rectangle.getX()+30);
 		 	    iv1.setY(rectangle.getY()+30);
@@ -106,6 +109,7 @@ public class Main extends Application {
 		 	   iv2.setX(rectangle.getX());
 		 	    iv2.setY(rectangle.getY());
 		 	    
+
 			    	  
 			    	  root.getChildren().addAll(rectangle,iv1,iv2);
 		       }

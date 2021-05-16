@@ -36,7 +36,6 @@ public class FinalBossBox extends DecoratorBox {
 	public void effect(BoardItf b) {
 		box.effect(b);;
 		b.fight(b.getCurrentPlayer().getArmy(), army);
-		if(!army.alive()) {b.endGame();}
 	}
 
 	@Override
