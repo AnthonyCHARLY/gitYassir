@@ -13,6 +13,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.HashMap;
+
 import application.core.Board;
 import application.core.BoardItf;
 import javafx.animation.KeyFrame;
@@ -51,9 +54,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.Group;
-
+import javafx.scene.effect.ImageInput;
+import javafx.scene.image.Image;
 
 public class Main extends Application {
+	
 	private Group root = new Group();
 	private Button buttonde;
 	private Button buttonnotify;
@@ -62,11 +67,24 @@ public class Main extends Application {
 	private Label descriptionp2;
 	private Label victory;
 	private int tourInt=1;
+	
 	@Override
     public void start(Stage primaryStage) {
 		BoardItf board = Board.getInstance("yassir", "anthony");
 		
+		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
+		Image imagePlayer1 = new Image("/smile.png",50,50,false,false);
+		 Image imagePlayer2 = new Image("/smileyas.png");
+		 
+		 
+		 ImageInput imageInput = new ImageInput();
+
+	     //Setting the position of the image
+	      
+		 
+		 
+		int indiceMap=0;
 		int i,j=0;
 		for( i=0; i<6; i++)
 		    for( j=0; j<6; j++)
@@ -79,13 +97,23 @@ public class Main extends Application {
 		       rectangle.setArcWidth(20.0d);
 		     // r.setOnMouseClicked(this);
 		       if((i== 0 ) && (j == 0 )) {
-		    	   	  rectangle.setAccessibleText("yassir, anthony");
+		    	   	  //rectangle.setEffect(imageInput);
+		    	   imageInput.setX(rectangle.getX());
+		 	      imageInput.setY(rectangle.getY());
+		 	      
+
+		 	     //Setting source for image input
+		 	      imageInput.setSource(imagePlayer1);
+		    	   	  
 			    	  root.getChildren().add(rectangle);
+			    	  
 		       }
 		       else if((i== 0 ) || (j == 0 )|| (j == 5 ) || (i == 5 )) {
 		    	  root.getChildren().add(rectangle);
+		    	  mapRectangle.put(indiceMap, rectangle);
+		    	  indiceMap++;
 		      }
-		      
+		     
 		      
 		    }
 		
