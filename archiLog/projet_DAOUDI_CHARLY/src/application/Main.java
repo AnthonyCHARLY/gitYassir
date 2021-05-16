@@ -74,7 +74,7 @@ public class Main extends Application {
 		
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
-		Image imagePlayer1 = new Image("/smile.png",50,50,false,false);
+		Image imagePlayer1 = new Image("/smile.png",50,50,true,true);
 		 Image imagePlayer2 = new Image("/smileyas.png");
 		 
 		 
@@ -104,7 +104,7 @@ public class Main extends Application {
 
 		 	     //Setting source for image input
 		 	      imageInput.setSource(imagePlayer1);
-		    	   	  
+		 	     rectangle.setEffect(imageInput);
 			    	  root.getChildren().add(rectangle);
 			    	  
 		       }
