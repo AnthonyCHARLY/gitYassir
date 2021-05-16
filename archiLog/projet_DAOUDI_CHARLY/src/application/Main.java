@@ -114,6 +114,7 @@ public class Main extends Application {
 			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
 			    	
 		       }
+
 		       
 		       else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
 		    	   
@@ -125,6 +126,7 @@ public class Main extends Application {
 		    	   mapRectangle.put(indiceMap, rectangle);
 		    	   indiceMap++;
 		    	   
+
 		      }
 		     
 		      
