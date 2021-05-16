@@ -75,12 +75,11 @@ public class Main extends Application {
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
 		Image imagePlayer1 = new Image("/smile.png",50,50,false,false);
-		 Image imagePlayer2 = new Image("/smileyas.png");
+		Image imagePlayer2 = new Image("/smileyas.png");
 		 
 		 
-		 ImageInput imageInput = new ImageInput();
-
-	     //Setting the position of the image
+		ImageInput imageInput = new ImageInput();
+		imageInput.setSource(imagePlayer1);
 	      
 		 
 		 
@@ -98,7 +97,7 @@ public class Main extends Application {
 		     // r.setOnMouseClicked(this);
 		       if((i== 0 ) && (j == 0 )) {
 		    	   	  //rectangle.setEffect(imageInput);
-		    	   imageInput.setX(rectangle.getX());
+		    	  imageInput.setX(rectangle.getX());
 		 	      imageInput.setY(rectangle.getY());
 		 	      
 

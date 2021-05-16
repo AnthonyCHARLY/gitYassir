@@ -4,7 +4,6 @@ import soldier.core.UnitGroup;
 
 public interface BoardItf {
 	
-	
 	public Player getCurrentPlayer();
 	
 	public Player getPlayer1();
@@ -21,7 +20,7 @@ public interface BoardItf {
 	
 	public void boardBuilder(Builder b);
 	
-	public void endGame();
+	public void reset();
 	
 	public boolean isGameOver();
 	

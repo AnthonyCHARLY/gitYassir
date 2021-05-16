@@ -48,7 +48,7 @@ public class Board implements BoardItf{
 	}
 	
 	
-	public  static  BoardItf getInstance(String p1Name, String p2Name) {
+	public static BoardItf getInstance(String p1Name, String p2Name) {
 		
 		if(_instance == null)
 			_instance = new Board(p1Name, p2Name);
@@ -173,9 +173,9 @@ public class Board implements BoardItf{
 	}
 
 	@Override
-	public void endGame() {
+	public void reset() {
 		// TODO Auto-generated method stub
-		
+		_instance = new Board(p1.getName(), p2.getName());
 	}
 
 	@Override
