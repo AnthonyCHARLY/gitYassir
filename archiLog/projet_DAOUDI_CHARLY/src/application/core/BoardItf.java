@@ -1,5 +1,7 @@
 package application.core;
 
+import java.util.Map;
+
 import soldier.core.UnitGroup;
 
 public interface BoardItf {
@@ -19,6 +21,8 @@ public interface BoardItf {
 	public void makeBoxes();
 	
 	public void boardBuilder(Builder b);
+	
+	public Map<Integer,Box> getBoxes();
 	
 	public void reset();
 	
