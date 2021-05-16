@@ -68,7 +68,7 @@ public class BoardBuilder extends Application implements Builder {
 		 buildUtil(p1, p2);
 		 buildMessage();
 		 
-		 Scene scenegraph = new Scene (root,700,400) ;
+		 Scene scenegraph = new Scene (root,750,500) ;
 		 primaryStage.setScene (scenegraph) ;
 		 primaryStage.setTitle ("Jeu de l'oie");
 		 primaryStage.show ();
@@ -93,11 +93,18 @@ public class BoardBuilder extends Application implements Builder {
 		for( i=0; i<6; i++)
 		    for( j=0; j<6; j++)
 		    {
-		      Rectangle rectangle = new Rectangle(50 + 50*i, 50+50*j, 50, 50);
+		      Rectangle rectangle = new Rectangle(60 + 60*i, 60+60*j, 60, 60);
 		      rectangle.setFill(Color.TRANSPARENT);
-		      rectangle.setStroke(Color.BLACK);
+		      rectangle.setStroke(Color.BLUE);
+		      
+		      rectangle.setArcHeight(20.0d);
+		       rectangle.setArcWidth(20.0d);
 		     // r.setOnMouseClicked(this);
-		      if((i== 0 ) || (j == 0 )) {
+		       if((i== 0 ) && (j == 0 )) {
+		    	   	  rectangle.setAccessibleText("yassir, anthony");
+			    	  root.getChildren().add(rectangle);
+		       }
+		       else if((i== 0 ) || (j == 0 )) {
 		    	  root.getChildren().add(rectangle);
 		      }
 		      else if((j == 5 ) || (i == 5 )){
@@ -119,15 +126,15 @@ public class BoardBuilder extends Application implements Builder {
 		 tour.setLayoutX(500);
 		 tour.setVisible(true);
 		 
-		 descriptionp1= new Label("Description " + p1.getName() +": \n Puissance " + p1.getArmy().strike()+" Point de vie"+p1.getArmy().getHealthPoints());
+		 descriptionp1= new Label("Description " + p1.getName() +": \n Puissance \n " + p1.getArmy().strike()+" Point de vie "+p1.getArmy().getHealthPoints());
 		 descriptionp1.setTextFill(Color.BLACK);
-		 descriptionp1.setLayoutX(400);
+		 descriptionp1.setLayoutX(500);
 		 descriptionp1.setLayoutY(100);
 		 descriptionp1.setVisible(true);
 		 
-		 descriptionp2= new Label("Description " + p2.getName() +": \n Puissance " + p2.getArmy().strike()+" Point de vie"+p2.getArmy().getHealthPoints());
+		 descriptionp2= new Label("Description " + p2.getName() +": \n Puissance \n" + p2.getArmy().strike()+" Point de vie "+p2.getArmy().getHealthPoints());
 		 descriptionp2.setTextFill(Color.BLACK);
-		 descriptionp2.setLayoutX(400);
+		 descriptionp2.setLayoutX(500);
 		 descriptionp2.setLayoutY(200);
 		 descriptionp2.setVisible(true);
 		 
