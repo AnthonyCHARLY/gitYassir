@@ -117,6 +117,8 @@ public class Main extends Application {
 		    	  root.getChildren().add(rectangle);
 		    	  mapRectangle.put(indiceMap, rectangle);
 		    	  indiceMap++;
+		    	  
+		    	 
 		      }
 		     
 		      
