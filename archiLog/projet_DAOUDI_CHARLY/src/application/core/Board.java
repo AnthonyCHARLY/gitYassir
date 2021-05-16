@@ -150,9 +150,9 @@ public class Board implements BoardItf{
 		boxes.put(15, saveBox);
 		
 		for(Box b : speBoxes) {
-			int order = (int)Math.random() * (MAX_BOXES-1);
+			int order = (int)Math.random() * (MAX_BOXES-2 + 1);
 			while(boxes.keySet().contains(order))
-				order = (int)Math.random() * (MAX_BOXES-1);
+				order = (int)Math.random() * (MAX_BOXES-2 + 1);
 			boxes.put(order,b);
 		}
 		
