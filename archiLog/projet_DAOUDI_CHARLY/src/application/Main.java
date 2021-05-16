@@ -76,6 +76,7 @@ public class Main extends Application {
 		
 		Image imagePlayer1 = new Image("/smile.png",50,50,false,false);
 		Image imagePlayer2 = new Image("/smileyas.png");
+
 		 
 		 
 		ImageInput imageInput = new ImageInput();
@@ -103,7 +104,7 @@ public class Main extends Application {
 
 		 	     //Setting source for image input
 		 	      imageInput.setSource(imagePlayer1);
-		    	   	  
+		 	     rectangle.setEffect(imageInput);
 			    	  root.getChildren().add(rectangle);
 			    	  
 		       }
