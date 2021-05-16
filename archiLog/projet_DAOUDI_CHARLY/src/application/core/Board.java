@@ -30,6 +30,7 @@ public class Board implements BoardItf{
 	private Board(String p1Name, String p2Name) {
 		
 		boxes = new HashMap<Integer,Box>();
+		makeBoxes();
 		
 		isGameOver = false;
 		
@@ -194,6 +195,13 @@ public class Board implements BoardItf{
 	public Player getPlayer2() {
 		// TODO Auto-generated method stub
 		return p2;
+	}
+
+
+	@Override
+	public Map<Integer, Box> getBoxes() {
+		// TODO Auto-generated method stub
+		return boxes;
 	}
 	
 	
