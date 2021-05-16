@@ -57,19 +57,25 @@ import javafx.scene.Group;
 import javafx.scene.effect.ImageInput;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 
 public class Main extends Application {
 	
 	
 	private Group root = new Group();
 	private Button buttonde;
+	private Button buttondeplayer2;
 	private Button buttonnotify;
 	private Label tour;
 	private Label descriptionp1;
 	private Label descriptionp2;
 	private Label victory;
 	private int tourInt=1;
-	
+	private BoardItf board;
+	private int indiceMap;
+	private int newposition =1;
 	@Override
     public void start(Stage primaryStage) {
 		BoardItf board = Board.getInstance("yassir", "anthony");
@@ -86,17 +92,32 @@ public class Main extends Application {
 	    //Setting the position of the image
 		ImageView imgViewp1 = new ImageView(imagePlayer1);
 		ImageView imgViewp2 = new ImageView(imagePlayer2);
+		
+		createBoardGame(mapRectangle,imgViewp1,imgViewp2,board);
+		boardUtil(board);
+		boardEvent();
+		
+		forwardEvent(mapRectangle, imgViewp1, board );
+		forwardEventp2(mapRectangle, imgViewp2, board );
+		
+		
+		Scene scenegraph = new Scene (root,750,500) ;
+		 primaryStage.setScene (scenegraph) ;
+		 primaryStage.setTitle ("Jeu de l'oie");
+		 primaryStage.show ();
+		
+    }
 
-		 
-		 
+	public void createBoardGame(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,ImageView imgViewp2,BoardItf board) {
+		
 		int indiceMap=0;
 		int width,height=0;
 		for( width=0; width<6; width++)
 			for( height=0; height<6; height++){
 				
 		    	Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 60, 60);
-		    	rectangle.setFill(Color.TRANSPARENT);
-		    	rectangle.setStroke(Color.BLUE);
+		    	//rectangle.setFill(Color.TRANSPARENT);
+		    	//rectangle.setStroke(Color.BLUE);
 		      
 		        rectangle.setArcHeight(20.0d);
 		        rectangle.setArcWidth(20.0d);
@@ -110,30 +131,62 @@ public class Main extends Application {
 		 	    
 		        	imgViewp2.setX(rectangle.getX());
 		        	imgViewp2.setY(rectangle.getY());
-			    	  
-			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
 			    	
+		        	rectangle.setFill(Color.TRANSPARENT);
+			    	rectangle.setStroke(Color.BLUE);
+			    	rectangle.setAccessibleRoleDescription("depart");
+			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
+			    	board.getPlayer1().setPosition(indiceMap);
+			    	board.getPlayer2().setPosition(indiceMap);
+			    	indiceMap++;
 		       }
 
 		       
 		       else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
 		    	   
-		    	   
+		    	   String type="Malus";
 		    	   //String type = board.getBoxes().get(indiceMap).getType();
 		    	   //System.out.println(type);
 		    	   // type = Neutral/Malus/Bonnus/Boss
+		    	   switch(type) {
+		    	   		case "Neutral": rectangle.setFill(Color.TRANSPARENT);
+		    	   			rectangle.setStroke(Color.BLUE);
+		    	   			rectangle.setAccessibleRoleDescription("Neutral");
+		    	   			break;
+		    	   		case "Malus": rectangle.setFill(Color.TRANSPARENT);
+	    	   				rectangle.setStroke(Color.RED);
+	    	   				rectangle.setAccessibleRoleDescription("Malus");
+	    	   				break;
+		    	   		case "Bonus": rectangle.setFill(Color.TRANSPARENT);
+	    	   				rectangle.setStroke(Color.GREEN);
+	    	   				rectangle.setAccessibleRoleDescription("Bonus");
+	    	   				break;
+		    	   		case "Boss": rectangle.setFill(Color.TRANSPARENT);
+	    	   				rectangle.setStroke(Color.YELLOW);
+	    	   				rectangle.setAccessibleRoleDescription("Boss");
+	    	   				break;
+		    	   		
+		    	   }
 		    	   root.getChildren().add(rectangle);
 		    	   mapRectangle.put(indiceMap, rectangle);
 		    	   indiceMap++;
+		    	   	
+		    	}
+		    	   
 		    	   
 
 		      }
-		     
-		      
-		    }
-		
-		buttonde= new Button();
-		 buttonde.setText("Lancer le dé");
+		     	      
+	}
+	
+	public void boardUtil(BoardItf board) {
+		 buttonde= new Button();
+		 buttonde.setText("Lancer le dé "  + board.getPlayer1().getName());
+		 
+		 buttondeplayer2= new Button();
+		 buttondeplayer2.setText("Lancer le dé " + board.getPlayer2().getName());
+		 buttondeplayer2.setLayoutX(300);
+		 buttondeplayer2.setDisable(true);
 		 
 		 
 		 tour= new Label("Tour : 1");
@@ -158,8 +211,11 @@ public class Main extends Application {
 		 victory.setLayoutX(300);
 		 victory.setVisible(false);
 		 
-		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
+		 root.getChildren().addAll(buttonde,buttondeplayer2,tour,descriptionp1,descriptionp2,victory);
 		
+		
+	}
+	public void boardEvent() {
 		 buttonde.setOnAction(new EventHandler<ActionEvent>() {
 			 
 	            @Override
@@ -171,14 +227,101 @@ public class Main extends Application {
 	             
 	            }
 	        });
+	}
+	
+	public void forwardEvent(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
+		buttonde.setOnAction(new EventHandler<ActionEvent>() {
+			 
+            @Override
+            public void handle(ActionEvent event) {
+            	
+            	for (HashMap.Entry<Integer,Rectangle> entry : mapRectangle.entrySet()) {
+        		    if(entry.getKey()==newposition) {
+        		    	imgViewp1.setX(entry.getValue().getX()+30);
+        	        	imgViewp1.setY(entry.getValue().getY()+30);
+        	        	board.getPlayer1().setPosition(newposition);
+        	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
+        	        	switch(entry.getValue().getAccessibleRoleDescription()) {
+        	        		case "Malus": malusMessageEvent();
+        	        					  break;
+        	        		case "Neutral":
+        	        					   break;
+        	        		case "Bonus": bonusMessageEvent();
+        	        					  break;
+        	        		case "Boss":  bossMessageEvent();
+        	        					  break;
+        	        	}
+        	        	
+        		    }
+        		}
+            	newposition ++;
+            	buttondeplayer2.setDisable(false);
+	            buttonde.setDisable(true);
+            }
+        });
 		
-		Scene scenegraph = new Scene (root,750,500) ;
-		 primaryStage.setScene (scenegraph) ;
-		 primaryStage.setTitle ("Jeu de l'oie");
-		 primaryStage.show ();
 		
-    }
-
+	}
+	
+	public void forwardEventp2(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
+		buttondeplayer2.setOnAction(new EventHandler<ActionEvent>() {
+			 
+            @Override
+            public void handle(ActionEvent event) {
+            	
+            	for (HashMap.Entry<Integer,Rectangle> entry : mapRectangle.entrySet()) {
+        		    if(entry.getKey()==newposition) {
+        		    	imgViewp1.setX(entry.getValue().getX()+2);
+        	        	imgViewp1.setY(entry.getValue().getY()+2);
+        	        	board.getPlayer2().setPosition(newposition);
+        	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
+        	        	switch(entry.getValue().getAccessibleRoleDescription()) {
+        	        		case "Malus": malusMessageEvent();
+        	        					  break;
+        	        		case "Neutral":
+        	        					   break;
+        	        		case "Bonus": bonusMessageEvent();
+        	        					  break;
+        	        		case "Boss":  bossMessageEvent();
+        	        					  break;
+        	        	}
+        	        	
+        		    }
+        		}
+            	newposition ++;
+            	tourInt ++;
+            	tour.setText("Tour : " + tourInt);
+	            buttondeplayer2.setDisable(true);
+	            buttonde.setDisable(false);
+	            
+            }
+        });
+		
+	}
+	
+	public void malusMessageEvent() {
+		        Alert alert = new Alert(AlertType.INFORMATION);
+		        alert.setTitle("Malus");
+		        alert.setHeaderText("");
+		        alert.setContentText("mettre la description du malus");
+		        alert.showAndWait();    
+	}
+	
+	public void bonusMessageEvent() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Malus");
+        alert.setHeaderText("");
+        alert.setContentText("mettre la description du bonus");
+        alert.showAndWait();    
+	}
+	
+	public void bossMessageEvent() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Malus");
+        alert.setHeaderText("");
+        alert.setContentText("mettre la description du boss!");
+        alert.showAndWait();    
+	}
     public static void main(String[] args) {
         launch(args);
     }

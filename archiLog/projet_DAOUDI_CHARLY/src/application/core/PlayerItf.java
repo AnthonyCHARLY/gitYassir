@@ -11,6 +11,8 @@ public interface PlayerItf {
 	
 	public int getPosition();
 	
+	public void setPosition(int newPosition);
+	
 	public void addInfantryUnit();
 	
 	public void addRiderUnit();

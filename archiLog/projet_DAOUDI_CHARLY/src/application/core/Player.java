@@ -108,4 +108,10 @@ public class Player implements PlayerItf, Cloneable{
 		this.position = pm.save.position;		
 	}
 
+	@Override
+	public void setPosition(int newPosition) {
+		// TODO Auto-generated method stub
+		this.position= newPosition;
+	}
+
 }
