@@ -97,7 +97,7 @@ public class Main extends Application {
 		boardUtil(board);
 		boardEvent();
 		
-		forwardEvent(mapRectangle, imgViewp1, board );
+		forwardEventp1(mapRectangle, imgViewp1, board );
 		forwardEventp2(mapRectangle, imgViewp2, board );
 		
 		
@@ -119,8 +119,8 @@ public class Main extends Application {
 		    	//rectangle.setFill(Color.TRANSPARENT);
 		    	//rectangle.setStroke(Color.BLUE);
 		      
-		        rectangle.setArcHeight(20.0d);
-		        rectangle.setArcWidth(20.0d);
+		        rectangle.setArcHeight(30.0d);
+		        rectangle.setArcWidth(30.0d);
 		        // r.setOnMouseClicked(this);
 		        
 		        if((width== 0 ) && (height == 0 )) {
@@ -181,11 +181,13 @@ public class Main extends Application {
 	
 	public void boardUtil(BoardItf board) {
 		 buttonde= new Button();
+		 buttonde.setLayoutY(20);
 		 buttonde.setText("Lancer le dé "  + board.getPlayer1().getName());
 		 
 		 buttondeplayer2= new Button();
 		 buttondeplayer2.setText("Lancer le dé " + board.getPlayer2().getName());
 		 buttondeplayer2.setLayoutX(300);
+		 buttondeplayer2.setLayoutY(20);
 		 buttondeplayer2.setDisable(true);
 		 
 		 
@@ -194,13 +196,13 @@ public class Main extends Application {
 		 tour.setLayoutX(500);
 		 tour.setVisible(true);
 		 
-		 descriptionp1= new Label("Description " + board.getPlayer1().getName()+": \n Puissance \n " + board.getPlayer1().getArmy().strike()+" Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
+		 descriptionp1= new Label("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
 		 descriptionp1.setTextFill(Color.BLACK);
 		 descriptionp1.setLayoutX(500);
 		 descriptionp1.setLayoutY(100);
 		 descriptionp1.setVisible(true);
 		 
-		 descriptionp2= new Label("Description " + board.getPlayer2().getName() +": \n Puissance \n" + board.getPlayer2().getArmy().strike()+" Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
+		 descriptionp2= new Label("Description " + board.getPlayer2().getName() +": \n Puissance " + board.getPlayer2().getArmy().strike()+" \n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
 		 descriptionp2.setTextFill(Color.BLACK);
 		 descriptionp2.setLayoutX(500);
 		 descriptionp2.setLayoutY(200);
@@ -229,7 +231,7 @@ public class Main extends Application {
 	        });
 	}
 	
-	public void forwardEvent(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
+	public void forwardEventp1(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
 		buttonde.setOnAction(new EventHandler<ActionEvent>() {
 			 
             @Override
@@ -304,7 +306,8 @@ public class Main extends Application {
 		        alert.setTitle("Malus");
 		        alert.setHeaderText("");
 		        alert.setContentText("mettre la description du malus");
-		        alert.showAndWait();    
+		        alert.showAndWait();
+		        
 	}
 	
 	public void bonusMessageEvent() {
