@@ -47,8 +47,8 @@ public class Board implements BoardItf{
 		currentPlayer = p1;
 	}
 	
-	@Override
-	public final  BoardItf getInstance(String p1Name, String p2Name) {
+	
+	public  static  BoardItf getInstance(String p1Name, String p2Name) {
 		
 		if(_instance == null)
 			_instance = new Board(p1Name, p2Name);

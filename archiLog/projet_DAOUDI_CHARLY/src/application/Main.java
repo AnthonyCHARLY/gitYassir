@@ -64,8 +64,8 @@ public class Main extends Application {
 	private int tourInt=1;
 	@Override
     public void start(Stage primaryStage) {
-		BoardItf board = null;
-		board.getInstance("yassir", "anthony");
+		BoardItf board = Board.getInstance("yassir", "anthony");
+		
 		
 		int i,j=0;
 		for( i=0; i<6; i++)

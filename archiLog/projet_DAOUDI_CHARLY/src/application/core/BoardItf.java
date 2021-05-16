@@ -4,7 +4,6 @@ import soldier.core.UnitGroup;
 
 public interface BoardItf {
 	
-	public  BoardItf getInstance(String p1Name, String p2Name);
 	
 	public Player getCurrentPlayer();
 	
