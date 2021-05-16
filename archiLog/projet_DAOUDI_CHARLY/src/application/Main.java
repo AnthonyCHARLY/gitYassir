@@ -60,6 +60,7 @@ import javafx.scene.image.ImageView;
 
 public class Main extends Application {
 	
+	
 	private Group root = new Group();
 	private Button buttonde;
 	private Button buttonnotify;
@@ -76,47 +77,51 @@ public class Main extends Application {
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
 
-		 Image imagePlayer1 = new Image("/smile.png",20,20,true,true);
-		 Image imagePlayer2 = new Image("/smileyas.png",20,20,true,true);
+		Image imagePlayer1 = new Image("/smile.png",20,20,true,true);
+		Image imagePlayer2 = new Image("/smileyas.png",20,20,true,true);
 		 
 		 
-		 ImageInput imageInput = new ImageInput();
+		ImageInput imageInput = new ImageInput();
 
-	     //Setting the position of the image
-		 ImageView imgViewp1 = new ImageView(imagePlayer1);
-		 ImageView imgViewp2 = new ImageView(imagePlayer2);
+	    //Setting the position of the image
+		ImageView imgViewp1 = new ImageView(imagePlayer1);
+		ImageView imgViewp2 = new ImageView(imagePlayer2);
 
 		 
 		 
 		int indiceMap=0;
 		int width,height=0;
 		for( width=0; width<6; width++)
-		    for( height=0; height<6; height++)
-		    {
-		      Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 60, 60);
-		      rectangle.setFill(Color.TRANSPARENT);
-		      rectangle.setStroke(Color.BLUE);
+			for( height=0; height<6; height++){
+				
+		    	Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 60, 60);
+		    	rectangle.setFill(Color.TRANSPARENT);
+		    	rectangle.setStroke(Color.BLUE);
 		      
-		      rectangle.setArcHeight(20.0d);
-		       rectangle.setArcWidth(20.0d);
-		     // r.setOnMouseClicked(this);
-		       if((width== 0 ) && (height == 0 )) {
+		        rectangle.setArcHeight(20.0d);
+		        rectangle.setArcWidth(20.0d);
+		        // r.setOnMouseClicked(this);
+		        
+		        if((width== 0 ) && (height == 0 )) {
 
 		    	 
-		 	     imgViewp1.setX(rectangle.getX()+30);
-		 	    imgViewp1.setY(rectangle.getY()+30);
+		        	imgViewp1.setX(rectangle.getX()+30);
+		        	imgViewp1.setY(rectangle.getY()+30);
 		 	    
-		 	   imgViewp2.setX(rectangle.getX());
-		 	    imgViewp2.setY(rectangle.getY());
-		 	    
-
+		        	imgViewp2.setX(rectangle.getX());
+		        	imgViewp2.setY(rectangle.getY());
 			    	  
-			    	  root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
+			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
+			    	
 		       }
+		       
 		       else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
-		    	  root.getChildren().add(rectangle);
-		    	  mapRectangle.put(indiceMap, rectangle);
-		    	  indiceMap++;
+		    	   
+		    	   String type = board.getBoxes().get(indiceMap).getType();
+		    	   root.getChildren().add(rectangle);
+		    	   mapRectangle.put(indiceMap, rectangle);
+		    	   indiceMap++;
+		    	   
 		      }
 		     
 		      
