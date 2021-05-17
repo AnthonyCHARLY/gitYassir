@@ -5,7 +5,8 @@ import application.core.Box;
 import application.core.DecoratorBox;
 
 public class MalusBoxBack extends MalusBox{
-
+	
+	private int value;
 	public MalusBoxBack(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
@@ -14,13 +15,15 @@ public class MalusBoxBack extends MalusBox{
 	@Override
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
+		
 		box.effect(b);
-		b.getCurrentPlayer().back((int)Math.random() * 3 + 1);
+		value=(int)Math.random() * 3 + 1;
+		b.getCurrentPlayer().back(value);
 	}
 
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		box.description();
+		return box.description() + " , back " + value + " case less";
 	}
 
 }

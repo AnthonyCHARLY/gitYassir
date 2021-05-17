@@ -17,8 +17,8 @@ public class SaveBox extends DecoratorBox{
 		b.getCurrentPlayer().getMemento();
 	}
 	
-	public void description() {
-		box.description();
+	public String description() {
+		return box.description() + "you reach to checkpoint";
 	}
 
 	@Override

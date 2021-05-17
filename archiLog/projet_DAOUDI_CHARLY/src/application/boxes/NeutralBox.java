@@ -12,10 +12,10 @@ public class NeutralBox implements Box{
 	}
 
 	@Override
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
 		System.out.println(" Nothing ");
-		
+		return "Nothing";
 	}
 
 	@Override

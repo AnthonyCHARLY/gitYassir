@@ -15,7 +15,7 @@ public abstract class BonusBox extends DecoratorBox{
 	public abstract void effect(BoardItf b);
 
 	@Override
-	public abstract void description();
+	public abstract String description();
 
 	@Override
 	public String getType() {

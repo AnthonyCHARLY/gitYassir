@@ -35,9 +35,9 @@ public class MalusBoxFight extends MalusBox{
 	}
 
 	@Override
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		
+		return " you have to fight";
 	}
 	
 	

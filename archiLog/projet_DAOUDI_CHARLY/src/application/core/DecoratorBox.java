@@ -21,9 +21,10 @@ public abstract class DecoratorBox implements Box {
 		box.effect(b);
 	}
 
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		box.description();
+		return box.description();
+		
 	}
 	
 	

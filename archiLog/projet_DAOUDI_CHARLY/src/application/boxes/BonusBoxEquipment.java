@@ -18,9 +18,9 @@ public class BonusBoxEquipment extends BonusBox{
 		b.getCurrentPlayer().addAttackWeapon();
 	}
 
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		box.description();
+		return box.description() + " , you won an equipment ";
 	}
 
 }

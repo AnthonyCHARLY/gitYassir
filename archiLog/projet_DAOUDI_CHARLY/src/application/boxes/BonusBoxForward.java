@@ -7,7 +7,8 @@ import application.core.Box;
 import application.core.DecoratorBox;
 
 public class BonusBoxForward extends BonusBox{
-
+	
+	private int value;
 	public BonusBoxForward(Box decoratorbox) {
 		super(decoratorbox);
 		// TODO Auto-generated constructor stub
@@ -16,16 +17,17 @@ public class BonusBoxForward extends BonusBox{
 	@Override
 	public void effect(BoardItf b) {
 		// TODO Auto-generated method stub
-		int bonus =2;
+		
 		box.effect(b);
-		Random rand = null;
-		b.getCurrentPlayer().forward((int)Math.random() * 3 + 1);
+		value=(int)Math.random() * 3 + 1;
+		b.getCurrentPlayer().forward(value);
 		
 	}
 
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		box.description();
+		return box.description() + " , forward  "
+				+ value +" case more ";
 	}
 
 }

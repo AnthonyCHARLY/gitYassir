@@ -18,9 +18,10 @@ public class MalusBoxUnit extends MalusBox{
 		b.getCurrentPlayer().removeUnit();
 	}
 
-	public void description() {
+	public String description() {
 		// TODO Auto-generated method stub
-		box.description();
+		return box.description() + " you lost an Unit";
+		
 	}
 
 }
