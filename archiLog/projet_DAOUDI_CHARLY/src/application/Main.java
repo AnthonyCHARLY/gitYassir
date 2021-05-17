@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
+import java.util.Set;
 
 import application.core.Board;
 import application.core.BoardItf;
@@ -78,6 +79,7 @@ public class Main extends Application {
 	private int newposition =1;
 	@Override
     public void start(Stage primaryStage) {
+		
 		BoardItf board = Board.getInstance("yassir", "anthony");
 		
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
@@ -115,7 +117,7 @@ public class Main extends Application {
 		for( width=0; width<6; width++)
 			for( height=0; height<6; height++){
 				
-		    	Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 60, 60);
+		    	Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 55, 55);
 		    	//rectangle.setFill(Color.TRANSPARENT);
 		    	//rectangle.setStroke(Color.BLUE);
 		      
@@ -139,15 +141,14 @@ public class Main extends Application {
 			    	board.getPlayer1().setPosition(indiceMap);
 			    	board.getPlayer2().setPosition(indiceMap);
 			    	indiceMap++;
-		       }
+		        }
 
 		       
-		       else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
-		    	   
-		    	   String type="Malus";
-		    	   //String type = board.getBoxes().get(indiceMap).getType();
-		    	   //System.out.println(type);
-		    	   // type = Neutral/Malus/Bonnus/Boss
+		        else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
+		        	
+		        	String type= board.getBoxes().get(-1).getType();
+		    	   if(board.getBoxes().containsKey(indiceMap))
+		    		   type = board.getBoxes().get(indiceMap).getType();
 		    	   switch(type) {
 		    	   		case "Neutral": rectangle.setFill(Color.TRANSPARENT);
 		    	   			rectangle.setStroke(Color.BLUE);
