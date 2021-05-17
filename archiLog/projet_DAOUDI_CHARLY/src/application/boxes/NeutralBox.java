@@ -15,13 +15,13 @@ public class NeutralBox implements Box{
 	public String description() {
 		// TODO Auto-generated method stub
 		System.out.println(" Nothing ");
-		return "Nothing";
+		return "";
 	}
 
 	@Override
 	public String getType() {
 		// TODO Auto-generated method stub
-		return "";
+		return "Neutral";
 	}
 
 }
