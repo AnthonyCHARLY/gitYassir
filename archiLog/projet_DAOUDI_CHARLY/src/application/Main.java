@@ -243,29 +243,30 @@ public class Main extends Application {
             @Override
             public void handle(ActionEvent event) {
             	
-            	for (HashMap.Entry<Integer,Rectangle> entry : mapRectangle.entrySet()) {
-        		    if(entry.getKey()==newposition) {
-        		    	imgViewp1.setX(entry.getValue().getX()+30);
-        	        	imgViewp1.setY(entry.getValue().getY()+30);
-        	        	board.getPlayer1().setPosition(newposition);
-        	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
-                		Alert alert = new Alert(AlertType.INFORMATION);
-        		        if(board.getBoxes().containsKey(entry.getKey())) {
-        		        	alert.setTitle(board.getBoxes().get(entry.getKey()).getType());
-        		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(entry.getKey()).description());
-        		        	alert.showAndWait();
-        		        }
-        		        else {
-        		        	alert.setTitle(board.getBoxes().get(-1).getType());
-        		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(-1).description());
-        		        	alert.showAndWait();
-            		    }
-        		}
-            	newposition ++;
+            	board.turn();
             	
-            }
+            	if(board.getCurrentPlayer() == board.getPlayer1()) {
+            		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
+            		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
+            	}
+            	else {
+            		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
+            		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
+            	}
+
+            	Alert alert = new Alert(AlertType.INFORMATION);
+            	if( board.getBoxes().containsKey( board.getCurrentPlayer().getPosition() ) ) {
+            		alert.setTitle(board.getBoxes().get(board.getCurrentPlayer().getPosition()).getType());
+            		alert.setHeaderText("");
+            		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
+            		alert.showAndWait();
+            	}
+            	else {
+            		alert.setTitle(board.getBoxes().get(-1).getType());
+            		alert.setHeaderText("");
+            		alert.setContentText(board.getBoxes().get(-1).description());
+            		alert.showAndWait();
+            	}
             }
             
         });
