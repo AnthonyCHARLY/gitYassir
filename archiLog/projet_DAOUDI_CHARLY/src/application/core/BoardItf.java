@@ -11,16 +11,14 @@ public interface BoardItf {
 	public Player getPlayer1();
 	
 	public Player getPlayer2();
-	
-	public void turn();
+		
+	public int turn();
 	
 	public void endTurn();
 	
 	public void fight(UnitGroup team1, UnitGroup team2);
 	
 	public void makeBoxes();
-	
-	public void boardBuilder(Builder b);
 	
 	public Map<Integer,Box> getBoxes();
 	

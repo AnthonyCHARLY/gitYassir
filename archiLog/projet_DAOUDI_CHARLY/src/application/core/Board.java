@@ -67,7 +67,7 @@ public class Board implements BoardItf{
 	}
 	
 	@Override
-	public void turn() {
+	public int turn() {
 		
 		int dice = (int)(Math.random() * 6) + 1;
 		System.out.println(dice);
@@ -81,10 +81,12 @@ public class Board implements BoardItf{
 			boxes.get(currentPlayer.getPosition()).effect(this);
 		else
 			boxes.get(-1).effect(this);
+		return dice;
 	}
 	
 	@Override
 	public void endTurn() {
+		
 		if(!p1.getArmy().alive()) {
 			p1.backCheckpoint();
 		}
@@ -166,18 +168,6 @@ public class Board implements BoardItf{
 		}
 		
 		boxes.put(MAX_BOXES-1, finalBox);
-		
-	}
-	
-	@Override
-	public void boardBuilder(Builder b) {
-		
-		b.buildHeader(); // haut de 
-		b.buildBoard(); //game board
-		b.buildUtil(p1,p2); //buttons
-		b.buildPlayers(p1,p2); //players positions
-		b.buildStatements(); //current player statments
-		b.buildMessage(); //turn infromations 
 		
 	}
 
