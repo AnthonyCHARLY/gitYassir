@@ -67,7 +67,6 @@ public class Main extends Application {
 	
 	private Group root = new Group();
 	private Button buttonde;
-	private Button buttondeplayer2;
 	private Button buttonnotify;
 	private Label tour;
 	private Label descriptionp1;
@@ -101,7 +100,7 @@ public class Main extends Application {
 		boardEvent();
 		
 		forwardEventp1(mapRectangle, imgViewp1, board );
-		forwardEventp2(mapRectangle, imgViewp2, board );
+		
 		
 		Scene scenegraph = new Scene (root,750,500) ;
 		
@@ -194,13 +193,8 @@ public class Main extends Application {
 	public void boardUtil(BoardItf board) {
 		 buttonde= new Button();
 		 buttonde.setLayoutY(20);
-		 buttonde.setText("Lancer le dé "  + board.getPlayer1().getName());
+		 buttonde.setText("Lancer le de ");
 		 
-		 buttondeplayer2= new Button();
-		 buttondeplayer2.setText("Lancer le dé " + board.getPlayer2().getName());
-		 buttondeplayer2.setLayoutX(300);
-		 buttondeplayer2.setLayoutY(20);
-		 buttondeplayer2.setDisable(true);
 		 
 		 
 		 tour= new Label("Tour : 1");
@@ -225,7 +219,7 @@ public class Main extends Application {
 		 victory.setLayoutX(300);
 		 victory.setVisible(false);
 		 
-		 root.getChildren().addAll(buttonde,buttondeplayer2,tour,descriptionp1,descriptionp2,victory);
+		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
 		
 		
 	}
@@ -270,8 +264,7 @@ public class Main extends Application {
             		    }
         		}
             	newposition ++;
-            	buttondeplayer2.setDisable(false);
-	            buttonde.setDisable(true);
+            	
             }
             }
             
@@ -280,44 +273,7 @@ public class Main extends Application {
 		
 	}
 	
-	public void forwardEventp2(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
-		buttondeplayer2.setOnAction(new EventHandler<ActionEvent>() {
-			 
-            @Override
-            public void handle(ActionEvent event) {
-            	
-            	for (HashMap.Entry<Integer,Rectangle> entry : mapRectangle.entrySet()) {
-        		    if(entry.getKey()==newposition) {
-        		    	imgViewp1.setX(entry.getValue().getX()+2);
-        	        	imgViewp1.setY(entry.getValue().getY()+2);
-        	        	board.getPlayer2().setPosition(newposition);
-        	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
-                		Alert alert = new Alert(AlertType.INFORMATION);
-        		        if(board.getBoxes().containsKey(entry)) {
-        		        	alert.setTitle(board.getBoxes().get(entry).getType());
-        		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(entry).description());
-        		        	alert.showAndWait();
-        		        }
-        		        else {
-        		        	alert.setTitle(board.getBoxes().get(-1).getType());
-        		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(-1).description());
-        		        	alert.showAndWait();
-            		    }
-        	        	
-        		    }
-        		}
-            	newposition ++;
-            	tourInt ++;
-            	tour.setText("Tour : " + tourInt);
-	            buttondeplayer2.setDisable(true);
-	            buttonde.setDisable(false);
-	            
-            }
-        });
-		
-	}
+	
 
     public static void main(String[] args) {
         launch(args);
