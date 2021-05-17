@@ -256,10 +256,10 @@ public class Main extends Application {
         	        	board.getPlayer1().setPosition(newposition);
         	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
                 		Alert alert = new Alert(AlertType.INFORMATION);
-        		        if(board.getBoxes().containsKey(entry)) {
-        		        	alert.setTitle(board.getBoxes().get(entry).getType());
+        		        if(board.getBoxes().containsKey(entry.getKey())) {
+        		        	alert.setTitle(board.getBoxes().get(entry.getKey()).getType());
         		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(entry).description());
+        		        	alert.setContentText(board.getBoxes().get(entry.getKey()).description());
         		        	alert.showAndWait();
         		        }
         		        else {
@@ -293,19 +293,12 @@ public class Main extends Application {
         	        	board.getPlayer2().setPosition(newposition);
         	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
                 		Alert alert = new Alert(AlertType.INFORMATION);
-        		        if(board.getBoxes().containsKey(entry)) {
-        		        	alert.setTitle(board.getBoxes().get(entry).getType());
+        		        if(board.getBoxes().containsKey(entry.getKey())) {
+        		        	alert.setTitle(board.getBoxes().get(entry.getKey()).getType());
         		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(entry).description());
+        		        	alert.setContentText(board.getBoxes().get(entry.getKey()).description());
         		        	alert.showAndWait();
         		        }
-        		        else {
-        		        	alert.setTitle(board.getBoxes().get(-1).getType());
-        		        	alert.setHeaderText("");
-        		        	alert.setContentText(board.getBoxes().get(-1).description());
-        		        	alert.showAndWait();
-            		    }
-        	        	
         		    }
         		}
             	newposition ++;
