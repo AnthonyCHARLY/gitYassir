@@ -3,6 +3,7 @@ package application.boxes;
 import application.core.BoardItf;
 import application.core.Box;
 import application.core.DecoratorBox;
+import soldier.ages.AgeFutureFactory;
 import soldier.ages.AgeMiddleFactory;
 import soldier.core.AgeAbstractFactory;
 import soldier.core.UnitGroup;
@@ -30,9 +31,7 @@ public class FinalBossBox extends DecoratorBox {
 		army.addEquipment(unitsFactory.defenseWeapon());
 		army.addEquipment(unitsFactory.defenseWeapon());
 		army.addEquipment(unitsFactory.defenseWeapon());
-		
-		System.out.println(army.getHealthPoints());
-		System.out.println(army.strike());
+
 		
 	}
 	
