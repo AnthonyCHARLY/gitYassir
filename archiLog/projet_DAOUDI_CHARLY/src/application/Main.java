@@ -80,7 +80,8 @@ public class Main extends Application {
 	@Override
     public void start(Stage primaryStage) {
 		
-		BoardItf board = Board.getInstance("yassir", "anthony");
+		
+		BoardItf board = Board.getInstance("Yassir","Anthony" );
 		
 		HashMap<Integer,Rectangle> mapRectangle = new HashMap<Integer,Rectangle>();
 		
@@ -102,9 +103,19 @@ public class Main extends Application {
 		forwardEventp1(mapRectangle, imgViewp1, board );
 		forwardEventp2(mapRectangle, imgViewp2, board );
 		
-		
 		Scene scenegraph = new Scene (root,750,500) ;
-		 primaryStage.setScene (scenegraph) ;
+		
+		
+		Button buttonscenelogin =new Button(" Commencer ");
+		buttonscenelogin.setLayoutY(200);
+		buttonscenelogin.setLayoutX(300);
+		buttonscenelogin.setOnAction(e ->{ primaryStage.setScene (scenegraph);  });
+		Group layoutlogin = new Group();
+		layoutlogin.getChildren().add(buttonscenelogin);
+		
+		Scene scenelogin= new Scene (layoutlogin,750,500);
+		
+		 primaryStage.setScene (scenelogin) ;
 		 primaryStage.setTitle ("Jeu de l'oie");
 		 primaryStage.show ();
 		
@@ -135,7 +146,7 @@ public class Main extends Application {
 		        	imgViewp2.setY(rectangle.getY());
 			    	
 		        	rectangle.setFill(Color.TRANSPARENT);
-			    	rectangle.setStroke(Color.BLUE);
+			    	rectangle.setStroke(Color.BLACK);
 			    	rectangle.setAccessibleRoleDescription("depart");
 			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
 			    	board.getPlayer1().setPosition(indiceMap);
@@ -158,6 +169,10 @@ public class Main extends Application {
 	    	   				rectangle.setStroke(Color.RED);
 	    	   				rectangle.setAccessibleRoleDescription("Malus");
 	    	   				break;
+		    	   		case "Save": rectangle.setFill(Color.TRANSPARENT);
+    	   					rectangle.setStroke(Color.CHOCOLATE);
+    	   					rectangle.setAccessibleRoleDescription("Save");
+    	   					break;
 		    	   		case "Bonus": rectangle.setFill(Color.TRANSPARENT);
 	    	   				rectangle.setStroke(Color.GREEN);
 	    	   				rectangle.setAccessibleRoleDescription("Bonus");
@@ -253,6 +268,8 @@ public class Main extends Application {
         	        					  break;
         	        		case "Boss":  bossMessageEvent();
         	        					  break;
+        	        		case "Save":  saveMessageEvent();
+      					  				  break;
         	        	}
         	        	
         		    }
@@ -287,6 +304,8 @@ public class Main extends Application {
         	        					  break;
         	        		case "Boss":  bossMessageEvent();
         	        					  break;
+        	        		case "Save":  saveMessageEvent();
+        	        					  break;
         	        	}
         	        	
         		    }
@@ -313,7 +332,7 @@ public class Main extends Application {
 	
 	public void bonusMessageEvent() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Malus");
+        alert.setTitle("Bonus");
         alert.setHeaderText("");
         alert.setContentText("mettre la description du bonus");
         alert.showAndWait();    
@@ -321,10 +340,18 @@ public class Main extends Application {
 	
 	public void bossMessageEvent() {
         Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Malus");
+        alert.setTitle("Boss");
         alert.setHeaderText("");
         alert.setContentText("mettre la description du boss!");
         alert.showAndWait();    
+	}
+	public void saveMessageEvent() {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Save");
+        alert.setHeaderText("");
+        alert.setContentText("mettre la description du malus");
+        alert.showAndWait();
+        
 	}
     public static void main(String[] args) {
         launch(args);
