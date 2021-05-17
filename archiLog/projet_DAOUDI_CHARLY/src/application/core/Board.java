@@ -69,8 +69,11 @@ public class Board implements BoardItf{
 	@Override
 	public void turn() {
 		
-		int dice = (int)Math.random() * 6 + 1;
+		int dice = (int)(Math.random() * 6) + 1;
+		System.out.println(dice);
+		System.out.println(currentPlayer.getPosition());
 		currentPlayer.forward(dice);
+		System.out.println(currentPlayer.getPosition());
 		
 		if(p1.getPosition() == p2.getPosition()) { fight(p1.getArmy(),p2.getArmy()); }
 		

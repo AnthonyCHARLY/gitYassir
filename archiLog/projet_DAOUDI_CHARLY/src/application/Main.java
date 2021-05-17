@@ -251,12 +251,19 @@ public class Main extends Application {
             		imgViewp2.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+2);
             		imgViewp2.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+2);
             	}
+            	
             	Alert alert = new Alert(AlertType.INFORMATION);
             	if( board.getBoxes().containsKey( board.getCurrentPlayer().getPosition() ) ) {
             		alert.setTitle(board.getBoxes().get(board.getCurrentPlayer().getPosition()).getType());
             		alert.setHeaderText("");
             		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
             		alert.showAndWait();
+            	}
+            	
+            	board.endTurn();
+            	
+            	if(board.isGameOver()) {
+            		
             	}
             }
             
