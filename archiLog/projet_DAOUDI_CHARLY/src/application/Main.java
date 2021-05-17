@@ -113,40 +113,20 @@ public class Main extends Application {
 	public void createBoardGame(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,ImageView imgViewp2,BoardItf board) {
 		
 		int indiceMap=0;
-		int width,height=0;
-		for( width=0; width<6; width++)
-			for( height=0; height<6; height++){
+		int width = 0 ;
+		int height = 0;
+		for( int it=0; it<4; it++)
+			for( int it2=0; it2<5; it2++){
 				
-		    	Rectangle rectangle = new Rectangle(60 + 60*width, 60+60*height, 55, 55);
-		    	//rectangle.setFill(Color.TRANSPARENT);
-		    	//rectangle.setStroke(Color.BLUE);
-		      
+				Rectangle rectangle = new Rectangle(60 + 60*width, 60 + 60*height, 55, 55);
 		        rectangle.setArcHeight(30.0d);
 		        rectangle.setArcWidth(30.0d);
-		        // r.setOnMouseClicked(this);
+
 		        
-		        if((width== 0 ) && (height == 0 )) {
-
-		    	 
-		        	imgViewp1.setX(rectangle.getX()+30);
-		        	imgViewp1.setY(rectangle.getY()+30);
-		 	    
-		        	imgViewp2.setX(rectangle.getX());
-		        	imgViewp2.setY(rectangle.getY());
-			    	
-		        	rectangle.setFill(Color.TRANSPARENT);
-			    	rectangle.setStroke(Color.BLUE);
-			    	rectangle.setAccessibleRoleDescription("depart");
-			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
-			    	board.getPlayer1().setPosition(indiceMap);
-			    	board.getPlayer2().setPosition(indiceMap);
-			    	indiceMap++;
-		        }
-
-		       
-		        else if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
+		        if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
 		        	
 		        	String type= board.getBoxes().get(-1).getType();
+		        	
 		    	   if(board.getBoxes().containsKey(indiceMap))
 		    		   type = board.getBoxes().get(indiceMap).getType();
 		    	   switch(type) {
@@ -166,15 +146,39 @@ public class Main extends Application {
 	    	   				rectangle.setStroke(Color.YELLOW);
 	    	   				rectangle.setAccessibleRoleDescription("Boss");
 	    	   				break;
+		    	   		case "Save": rectangle.setFill(Color.TRANSPARENT);
+    	   					rectangle.setStroke(Color.PURPLE);
+    	   					rectangle.setAccessibleRoleDescription("Boss");
+    	   					break;
+		    	   			
 		    	   		
 		    	   }
-		    	   root.getChildren().add(rectangle);
-		    	   mapRectangle.put(indiceMap, rectangle);
-		    	   indiceMap++;
 		    	   	
 		    	}
-		    	   
-		    	   
+				
+		        if(indiceMap == 0) {
+
+		        	imgViewp1.setX(rectangle.getX()+30);
+		        	imgViewp1.setY(rectangle.getY()+30);
+		 	    
+		        	imgViewp2.setX(rectangle.getX());
+		        	imgViewp2.setY(rectangle.getY());
+			    	
+			    	root.getChildren().addAll(rectangle,imgViewp1,imgViewp2);
+		        }
+		        else
+		        	root.getChildren().add(rectangle);
+		        mapRectangle.put(indiceMap, rectangle);
+		        indiceMap++;
+		    	
+		        if(it == 0)
+					height++;
+				else if(it == 1)
+					width++;
+				else if(it == 2)
+					height--;
+				else if(it == 3)
+					width--;
 
 		      }
 		     	      
