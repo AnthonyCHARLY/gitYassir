@@ -259,7 +259,7 @@ public class Main extends Application {
             	actualizeSprits(mapRectangle,board);
             	
             	if(board.isGameOver()) {
-            		
+            		buttonde.setDisable(true);
             	}
             }
             
