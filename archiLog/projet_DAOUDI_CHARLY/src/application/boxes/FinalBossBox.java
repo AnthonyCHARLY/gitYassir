@@ -31,12 +31,17 @@ public class FinalBossBox extends DecoratorBox {
 		army.addEquipment(unitsFactory.defenseWeapon());
 		army.addEquipment(unitsFactory.defenseWeapon());
 		
+		System.out.println(army.getHealthPoints());
+		System.out.println(army.strike());
+		
 	}
 	
 	@Override
 	public void effect(BoardItf b) {
 		box.effect(b);;
 		b.fight(b.getCurrentPlayer().getArmy(), army);
+		System.out.println(army.getHealthPoints());
+		System.out.println(army.strike());
 	}
 
 	@Override

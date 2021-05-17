@@ -71,8 +71,6 @@ public class Player implements PlayerItf, Cloneable{
 	@Override
 	public void forward(int value) {
 		position += value;
-		PlayerMemento pm = (PlayerMemento)checkpoint;
-		System.out.println(pm.save.getArmy().strike());
 	}
 
 	@Override
@@ -106,8 +104,9 @@ public class Player implements PlayerItf, Cloneable{
 	@Override
 	public void backCheckpoint() {
 		PlayerMemento pm = (PlayerMemento)checkpoint;
-		this.army = pm.save.army;
-		this.position = pm.save.position;		
+		addInfantryUnit();
+		addRiderUnit();
+		this.position = pm.save.getPosition();		
 	}
 
 	@Override
