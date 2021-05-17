@@ -259,7 +259,23 @@ public class Main extends Application {
             	actualizeSprits(mapRectangle,board);
             	
             	if(board.isGameOver()) {
-            		buttonde.setDisable(true);
+            		Alert alertfinal = new Alert(AlertType.INFORMATION);
+            		if(board.getCurrentPlayer() == board.getPlayer1()) {
+            			alert.setTitle("Game Over");
+                		alert.setHeaderText("");
+                		alert.setContentText("Felicitation au " + board.getPlayer1().getName() +" vous avez gagné : )");
+                		alert.showAndWait();
+                		buttonde.setDisable(true);
+            			
+            		} else if (board.getCurrentPlayer() == board.getPlayer2()) {
+            			alert.setTitle("Game Over");
+                		alert.setHeaderText("");
+                		alert.setContentText("Felicitation au " + board.getPlayer2().getName() +" vous avez gagné : )");
+                		alert.showAndWait();
+                		buttonde.setDisable(true);
+            			
+            		}
+            		
             	}
             }
             
