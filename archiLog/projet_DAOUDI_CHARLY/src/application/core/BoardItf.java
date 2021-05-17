@@ -6,6 +6,8 @@ import soldier.core.UnitGroup;
 
 public interface BoardItf {
 	
+	public static final int MAX_BOXES = 20;
+
 	public Player getCurrentPlayer();
 	
 	public Player getPlayer1();

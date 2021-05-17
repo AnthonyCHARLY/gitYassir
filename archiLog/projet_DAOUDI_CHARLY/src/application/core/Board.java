@@ -25,7 +25,6 @@ public class Board implements BoardItf{
 	private Player p1, p2, currentPlayer;
 	private Map<Integer,Box> boxes;
 	private static Board _instance = null;
-	private static final int MAX_BOXES = 20;
 	private boolean isGameOver;
 	
 	private Board(String p1Name, String p2Name) {
@@ -70,10 +69,11 @@ public class Board implements BoardItf{
 	public int turn() {
 		
 		int dice = (int)(Math.random() * 6) + 1;
-		System.out.println(dice);
-		System.out.println(currentPlayer.getPosition());
-		currentPlayer.forward(dice);
-		System.out.println(currentPlayer.getPosition());
+		
+		if(currentPlayer.getPosition()+dice < MAX_BOXES)
+			currentPlayer.forward(dice);
+		else
+			currentPlayer.forward(MAX_BOXES-1-currentPlayer.getPosition());
 		
 		if(p1.getPosition() == p2.getPosition()) { fight(p1.getArmy(),p2.getArmy()); }
 		
@@ -81,20 +81,14 @@ public class Board implements BoardItf{
 			boxes.get(currentPlayer.getPosition()).effect(this);
 		else
 			boxes.get(-1).effect(this);
+		
 		return dice;
 	}
 	
 	@Override
 	public void endTurn() {
 		
-		if(!p1.getArmy().alive()) {
-			p1.backCheckpoint();
-		}
-		if(!p2.getArmy().alive()) {
-			p2.backCheckpoint();
-		}
-		
-		if(currentPlayer.getPosition() == MAX_BOXES)
+		if(currentPlayer.getPosition() == MAX_BOXES-1)
 			isGameOver = true;
 		
 		currentPlayer = (currentPlayer == p1) ? p2 : p1;
@@ -121,6 +115,13 @@ public class Board implements BoardItf{
 			}
 		}
 		
+		if(!p1.getArmy().alive()) {
+			p1.backCheckpoint();
+		}
+		if(!p2.getArmy().alive()) {
+			p2.backCheckpoint();
+		}
+		
 	}
 	
 	public void makeBoxes() {
@@ -136,7 +137,7 @@ public class Board implements BoardItf{
 		
 		Box bonus1 = new BonusBoxForward(new NeutralBox());
 		Box bonus2 = new BonusBoxUnit(new NeutralBox());
-		Box bonus3 = new BonusBoxUnit(new MalusBoxBack(new NeutralBox()));
+		Box bonus3 = new BonusBoxUnit(new BonusBoxForward(new NeutralBox()));
 		Box bonus4 = new BonusBoxEquipment(new BonusBoxUnit(new BonusBoxForward(new NeutralBox())));
 		
 		Box finalBox = new FinalBossBox(new NeutralBox());
@@ -156,9 +157,7 @@ public class Board implements BoardItf{
 		boxes.put(5, saveBox);
 		boxes.put(10, saveBox);
 		boxes.put(15, saveBox);
-		
-		System.out.println("quoi");
-		
+				
 		for(Box b : speBoxes) {
 			int order = (int)(Math.random() * (MAX_BOXES-2) + 1);
 			while(boxes.keySet().contains(order)) {

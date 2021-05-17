@@ -20,7 +20,7 @@ public class MalusBoxUnit extends MalusBox{
 
 	public String description() {
 		// TODO Auto-generated method stub
-		return box.description() + " you lost an Unit";
+		return box.description() + " Vous avez perdu une unite ;";
 		
 	}
 

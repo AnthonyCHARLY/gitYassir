@@ -17,13 +17,16 @@ public class MalusBoxBack extends MalusBox{
 		// TODO Auto-generated method stub
 		
 		box.effect(b);
-		value=(int)Math.random() * 3 + 1;
-		b.getCurrentPlayer().back(value);
+		value=(int)(Math.random() * 3) + 1;
+		if(b.getCurrentPlayer().getPosition() - value >= 0)
+			b.getCurrentPlayer().back(value);
+		else
+			b.getCurrentPlayer().back(b.getCurrentPlayer().getPosition());
 	}
 
 	public String description() {
 		// TODO Auto-generated method stub
-		return box.description() + " , back " + value + " case less";
+		return box.description() + " Reculer de " + value + " cases ;";
 	}
 
 }

@@ -25,7 +25,7 @@ public class BonusBoxUnit extends BonusBox{
 
 	public String description() {
 		// TODO Auto-generated method stub
-		return box.description() + " you won an Unit";
+		return box.description() + " Vous avez gagner une unite ;";
 	}
 
 }

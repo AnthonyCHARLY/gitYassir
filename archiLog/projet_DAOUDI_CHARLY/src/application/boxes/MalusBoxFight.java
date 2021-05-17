@@ -37,7 +37,7 @@ public class MalusBoxFight extends MalusBox{
 	@Override
 	public String description() {
 		// TODO Auto-generated method stub
-		return " you have to fight";
+		return " Vous devez vous battre ;";
 	}
 	
 	

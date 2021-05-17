@@ -19,15 +19,15 @@ public class BonusBoxForward extends BonusBox{
 		// TODO Auto-generated method stub
 		
 		box.effect(b);
-		value=(int)Math.random() * 3 + 1;
+		value=(int)(Math.random() * 3) + 1;
 		b.getCurrentPlayer().forward(value);
 		
 	}
 
 	public String description() {
 		// TODO Auto-generated method stub
-		return box.description() + " , forward  "
-				+ value +" case more ";
+		return box.description() + " Avancer de "
+				+ value +" cases ;";
 	}
 
 }

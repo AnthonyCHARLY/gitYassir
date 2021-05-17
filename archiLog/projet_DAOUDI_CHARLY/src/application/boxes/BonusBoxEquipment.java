@@ -20,7 +20,7 @@ public class BonusBoxEquipment extends BonusBox{
 
 	public String description() {
 		// TODO Auto-generated method stub
-		return box.description() + " , you won an equipment ";
+		return box.description() + " Vous avez gagne un equipement ;";
 	}
 
 }

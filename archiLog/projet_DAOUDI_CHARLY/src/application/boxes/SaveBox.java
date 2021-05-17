@@ -18,7 +18,7 @@ public class SaveBox extends DecoratorBox{
 	}
 	
 	public String description() {
-		return box.description() + "you reach to checkpoint";
+		return box.description() + " Vous avez atteint un point de sauvegard ;";
 	}
 
 	@Override
