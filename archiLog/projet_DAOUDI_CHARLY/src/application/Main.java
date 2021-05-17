@@ -132,8 +132,6 @@ public class Main extends Application {
 				Rectangle rectangle = new Rectangle(60 + 60*width, 60 + 60*height, 55, 55);
 		        rectangle.setArcHeight(30.0d);
 		        rectangle.setArcWidth(30.0d);
-		        
-		        if((width== 0 ) || (height == 0 )|| (height == 5 ) || (width == 5 )) {
 
 		        	
 		        	String type= board.getBoxes().get(-1).getType();
@@ -164,8 +162,6 @@ public class Main extends Application {
 		    	   			
 		    	   		
 		    	   }
-		    	   	
-		    	}
 				
 		        if(indiceMap == 0) {
 
@@ -259,25 +255,26 @@ public class Main extends Application {
         	        	imgViewp1.setY(entry.getValue().getY()+30);
         	        	board.getPlayer1().setPosition(newposition);
         	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
-        	        	switch(entry.getValue().getAccessibleRoleDescription()) {
-        	        		case "Malus": malusMessageEvent();
-        	        					  break;
-        	        		case "Neutral":
-        	        					   break;
-        	        		case "Bonus": bonusMessageEvent();
-        	        					  break;
-        	        		case "Boss":  bossMessageEvent();
-        	        					  break;
-        	        		case "Save":  saveMessageEvent();
-      					  				  break;
-        	        	}
-        	        	
-        		    }
+                		Alert alert = new Alert(AlertType.INFORMATION);
+        		        if(board.getBoxes().containsKey(entry)) {
+        		        	alert.setTitle(board.getBoxes().get(entry).getType());
+        		        	alert.setHeaderText("");
+        		        	alert.setContentText(board.getBoxes().get(entry).description());
+        		        	alert.showAndWait();
+        		        }
+        		        else {
+        		        	alert.setTitle(board.getBoxes().get(-1).getType());
+        		        	alert.setHeaderText("");
+        		        	alert.setContentText(board.getBoxes().get(-1).description());
+        		        	alert.showAndWait();
+            		    }
         		}
             	newposition ++;
             	buttondeplayer2.setDisable(false);
 	            buttonde.setDisable(true);
             }
+            }
+            
         });
 		
 		
@@ -295,18 +292,19 @@ public class Main extends Application {
         	        	imgViewp1.setY(entry.getValue().getY()+2);
         	        	board.getPlayer2().setPosition(newposition);
         	        	System.out.println(entry.getValue().getAccessibleRoleDescription());
-        	        	switch(entry.getValue().getAccessibleRoleDescription()) {
-        	        		case "Malus": malusMessageEvent();
-        	        					  break;
-        	        		case "Neutral":
-        	        					   break;
-        	        		case "Bonus": bonusMessageEvent();
-        	        					  break;
-        	        		case "Boss":  bossMessageEvent();
-        	        					  break;
-        	        		case "Save":  saveMessageEvent();
-        	        					  break;
-        	        	}
+                		Alert alert = new Alert(AlertType.INFORMATION);
+        		        if(board.getBoxes().containsKey(entry)) {
+        		        	alert.setTitle(board.getBoxes().get(entry).getType());
+        		        	alert.setHeaderText("");
+        		        	alert.setContentText(board.getBoxes().get(entry).description());
+        		        	alert.showAndWait();
+        		        }
+        		        else {
+        		        	alert.setTitle(board.getBoxes().get(-1).getType());
+        		        	alert.setHeaderText("");
+        		        	alert.setContentText(board.getBoxes().get(-1).description());
+        		        	alert.showAndWait();
+            		    }
         	        	
         		    }
         		}
@@ -320,39 +318,7 @@ public class Main extends Application {
         });
 		
 	}
-	
-	public void malusMessageEvent() {
-		        Alert alert = new Alert(AlertType.INFORMATION);
-		        alert.setTitle("Malus");
-		        alert.setHeaderText("");
-		        alert.setContentText("mettre la description du malus");
-		        alert.showAndWait();
-		        
-	}
-	
-	public void bonusMessageEvent() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Bonus");
-        alert.setHeaderText("");
-        alert.setContentText("mettre la description du bonus");
-        alert.showAndWait();    
-	}
-	
-	public void bossMessageEvent() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Boss");
-        alert.setHeaderText("");
-        alert.setContentText("mettre la description du boss!");
-        alert.showAndWait();    
-	}
-	public void saveMessageEvent() {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Save");
-        alert.setHeaderText("");
-        alert.setContentText("mettre la description du malus");
-        alert.showAndWait();
-        
-	}
+
     public static void main(String[] args) {
         launch(args);
     }
