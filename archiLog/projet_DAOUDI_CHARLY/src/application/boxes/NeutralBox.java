@@ -14,7 +14,6 @@ public class NeutralBox implements Box{
 	@Override
 	public String description() {
 		// TODO Auto-generated method stub
-		System.out.println(" Nothing ");
 		return "";
 	}
 

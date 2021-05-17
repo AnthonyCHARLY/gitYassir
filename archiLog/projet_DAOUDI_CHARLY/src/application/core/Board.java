@@ -78,8 +78,6 @@ public class Board implements BoardItf{
 			boxes.get(currentPlayer.getPosition()).effect(this);
 		else
 			boxes.get(-1).effect(this);
-		
-		endTurn();
 	}
 	
 	@Override
