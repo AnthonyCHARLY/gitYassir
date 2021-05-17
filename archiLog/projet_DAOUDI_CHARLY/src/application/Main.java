@@ -67,15 +67,13 @@ public class Main extends Application {
 	
 	private Group root = new Group();
 	private Button buttonde;
-	private Button buttonnotify;
 	private Label tour;
 	private Label descriptionp1;
 	private Label descriptionp2;
 	private Label victory;
 	private int tourInt=1;
-	private BoardItf board;
-	private int indiceMap;
-	private int newposition =1;
+	private ImageView imgViewp1;
+	private ImageView imgViewp2;
 	@Override
     public void start(Stage primaryStage) {
 		
@@ -92,14 +90,14 @@ public class Main extends Application {
 		ImageInput imageInput = new ImageInput();
 
 	    //Setting the position of the image
-		ImageView imgViewp1 = new ImageView(imagePlayer1);
-		ImageView imgViewp2 = new ImageView(imagePlayer2);
+		imgViewp1 = new ImageView(imagePlayer1);
+		imgViewp2 = new ImageView(imagePlayer2);
 		
 		createBoardGame(mapRectangle,imgViewp1,imgViewp2,board);
 		boardUtil(board);
 		boardEvent();
 		
-		forwardEventp1(mapRectangle, imgViewp1, board );
+		forwardEventp1(mapRectangle, board );
 		
 		
 		Scene scenegraph = new Scene (root,750,500) ;
@@ -237,7 +235,7 @@ public class Main extends Application {
 	        });
 	}
 	
-	public void forwardEventp1(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,BoardItf board ) {
+	public void forwardEventp1(HashMap<Integer,Rectangle> mapRectangle,BoardItf board ) {
 		buttonde.setOnAction(new EventHandler<ActionEvent>() {
 			 
             @Override
@@ -250,21 +248,14 @@ public class Main extends Application {
             		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
             	}
             	else {
-            		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
-            		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
+            		imgViewp2.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+2);
+            		imgViewp2.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+2);
             	}
-
             	Alert alert = new Alert(AlertType.INFORMATION);
             	if( board.getBoxes().containsKey( board.getCurrentPlayer().getPosition() ) ) {
             		alert.setTitle(board.getBoxes().get(board.getCurrentPlayer().getPosition()).getType());
             		alert.setHeaderText("");
             		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
-            		alert.showAndWait();
-            	}
-            	else {
-            		alert.setTitle(board.getBoxes().get(-1).getType());
-            		alert.setHeaderText("");
-            		alert.setContentText(board.getBoxes().get(-1).description());
             		alert.showAndWait();
             	}
             }
