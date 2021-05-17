@@ -243,26 +243,13 @@ public class Main extends Application {
             	
             	board.turn();
             	
-            	if(board.getCurrentPlayer() == board.getPlayer1()) {
-            		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
-            		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
-            		descriptionp1.setText("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
-            	}
-            	else {
-            		imgViewp2.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+2);
-            		imgViewp2.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+2);
-            		descriptionp2.setText("Description " + board.getPlayer2().getName()+": \n Puissance  " + board.getPlayer2().getArmy().strike()+"\n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
-            	}
-            	
-            	Alert alert = new Alert(AlertType.INFORMATION);
-            	if( board.getBoxes().containsKey( board.getCurrentPlayer().getPosition() ) ) {
-            		alert.setTitle(board.getBoxes().get(board.getCurrentPlayer().getPosition()).getType());
-            		alert.setHeaderText("");
-            		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
-            		alert.showAndWait();
-            	}
+
+            	actualizeSprits(mapRectangle,board);
+
             	
             	board.endTurn();
+            	
+            	actualizeSprits(mapRectangle,board);
             	
             	if(board.isGameOver()) {
             		
@@ -272,6 +259,27 @@ public class Main extends Application {
         });
 		
 		
+	}
+	
+	public void actualizeSprits(HashMap<Integer,Rectangle> mapRectangle,BoardItf board ) {
+    	if(board.getCurrentPlayer() == board.getPlayer1()) {
+    		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
+    		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
+    		descriptionp1.setText("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
+    	}
+    	else {
+    		imgViewp2.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+2);
+    		imgViewp2.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+2);
+    		descriptionp2.setText("Description " + board.getPlayer2().getName()+": \n Puissance  " + board.getPlayer2().getArmy().strike()+"\n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
+    	}
+    	
+    	Alert alert = new Alert(AlertType.INFORMATION);
+    	if( board.getBoxes().containsKey( board.getCurrentPlayer().getPosition() ) ) {
+    		alert.setTitle(board.getBoxes().get(board.getCurrentPlayer().getPosition()).getType());
+    		alert.setHeaderText("");
+    		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
+    		alert.showAndWait();
+    	}
 	}
 
     public static void main(String[] args) {
