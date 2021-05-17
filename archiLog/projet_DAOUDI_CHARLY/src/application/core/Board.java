@@ -69,6 +69,7 @@ public class Board implements BoardItf{
 	public int turn() {
 		
 		int dice = (int)(Math.random() * 6) + 1;
+		System.out.println(dice);
 		
 		if(currentPlayer.getPosition()+dice < MAX_BOXES)
 			currentPlayer.forward(dice);

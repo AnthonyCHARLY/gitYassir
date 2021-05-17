@@ -12,19 +12,16 @@ public class BonusBoxUnit extends BonusBox{
 
 	public BonusBoxUnit(Box decoratorbox) {
 		super(decoratorbox);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
 	public void effect(BoardItf b) {
-		// TODO Auto-generated method stub
 		box.effect(b);
 		b.getCurrentPlayer().addRiderUnit();
 		
 	}
 
 	public String description() {
-		// TODO Auto-generated method stub
 		return box.description() + " Vous avez gagner une unite ;";
 	}
 

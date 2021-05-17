@@ -9,7 +9,6 @@ public class MalusBoxBack extends MalusBox{
 	private int value;
 	public MalusBoxBack(Box decoratorbox) {
 		super(decoratorbox);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -25,7 +24,6 @@ public class MalusBoxBack extends MalusBox{
 	}
 
 	public String description() {
-		// TODO Auto-generated method stub
 		return box.description() + " Reculer de " + value + " cases ;";
 	}
 

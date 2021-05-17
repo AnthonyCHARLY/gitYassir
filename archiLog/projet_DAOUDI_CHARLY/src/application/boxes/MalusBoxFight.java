@@ -13,7 +13,6 @@ public class MalusBoxFight extends MalusBox{
 	
 	public MalusBoxFight(Box decoratorbox) {
 		super(decoratorbox);
-		// TODO Auto-generated constructor stub
 		resetArmy();
 		
 	}
@@ -36,7 +35,6 @@ public class MalusBoxFight extends MalusBox{
 
 	@Override
 	public String description() {
-		// TODO Auto-generated method stub
 		return " Vous devez vous battre ;";
 	}
 	

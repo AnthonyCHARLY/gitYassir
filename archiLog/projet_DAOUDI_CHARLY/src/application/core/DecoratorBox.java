@@ -17,12 +17,10 @@ public abstract class DecoratorBox implements Box {
 	}
 	
 	public void effect(BoardItf b) {
-		// TODO Auto-generated method stub
 		box.effect(b);
 	}
 
 	public String description() {
-		// TODO Auto-generated method stub
 		return box.description();
 		
 	}

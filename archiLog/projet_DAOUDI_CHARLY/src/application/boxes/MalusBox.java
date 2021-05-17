@@ -8,7 +8,6 @@ public abstract class MalusBox extends DecoratorBox{
 
 	public MalusBox(Box box) {
 		super(box);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -19,7 +18,6 @@ public abstract class MalusBox extends DecoratorBox{
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Malus";
 	}
 	

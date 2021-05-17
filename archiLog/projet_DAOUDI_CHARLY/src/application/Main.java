@@ -75,7 +75,7 @@ public class Main extends Application {
 	private ImageView imgViewp1;
 	private ImageView imgViewp2;
 	@Override
-    public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) {
 		
 		
 		BoardItf board = Board.getInstance("Yassir","Anthony" );
@@ -95,7 +95,6 @@ public class Main extends Application {
 		
 		createBoardGame(mapRectangle,imgViewp1,imgViewp2,board);
 		boardUtil(board);
-		boardEvent();
 		
 		forwardEventp1(mapRectangle, board );
 		
@@ -112,11 +111,11 @@ public class Main extends Application {
 		
 		Scene scenelogin= new Scene (layoutlogin,750,500);
 		
-		 primaryStage.setScene (scenelogin) ;
-		 primaryStage.setTitle ("Jeu de l'oie");
-		 primaryStage.show ();
+		primaryStage.setScene (scenelogin) ;
+		primaryStage.setTitle ("Jeu de l'oie");
+		primaryStage.show ();
 		
-    }
+	}
 
 	public void createBoardGame(HashMap<Integer,Rectangle> mapRectangle,ImageView imgViewp1,ImageView imgViewp2,BoardItf board) {
 		
@@ -131,34 +130,34 @@ public class Main extends Application {
 		        rectangle.setArcWidth(30.0d);
 
 		        	
-		        	String type= board.getBoxes().get(-1).getType();
-		        	
-		    	   if(board.getBoxes().containsKey(indiceMap))
-		    		   type = board.getBoxes().get(indiceMap).getType();
-		    	   switch(type) {
-		    	   		case "Neutral": rectangle.setFill(Color.TRANSPARENT);
-		    	   			rectangle.setStroke(Color.BLUE);
-		    	   			rectangle.setAccessibleRoleDescription("Neutral");
-		    	   			break;
-		    	   		case "Malus": rectangle.setFill(Color.TRANSPARENT);
-	    	   				rectangle.setStroke(Color.RED);
-	    	   				rectangle.setAccessibleRoleDescription("Malus");
-	    	   				break;
-		    	   		case "Save": rectangle.setFill(Color.TRANSPARENT);
-    	   					rectangle.setStroke(Color.CHOCOLATE);
-    	   					rectangle.setAccessibleRoleDescription("Save");
-    	   					break;
-		    	   		case "Bonus": rectangle.setFill(Color.TRANSPARENT);
-	    	   				rectangle.setStroke(Color.GREEN);
-	    	   				rectangle.setAccessibleRoleDescription("Bonus");
-	    	   				break;
-		    	   		case "Boss": rectangle.setFill(Color.TRANSPARENT);
-	    	   				rectangle.setStroke(Color.BLACK);
-	    	   				rectangle.setAccessibleRoleDescription("Boss");
-	    	   				break;
-		    	   			
+		        String type= board.getBoxes().get(-1).getType();
+		        
+		        if(board.getBoxes().containsKey(indiceMap))
+		        	type = board.getBoxes().get(indiceMap).getType();
+		        switch(type) {
+		        case "Neutral": rectangle.setFill(Color.TRANSPARENT);
+		        rectangle.setStroke(Color.BLUE);
+		        rectangle.setAccessibleRoleDescription("Neutral");
+		        break;
+		        case "Malus": rectangle.setFill(Color.TRANSPARENT);
+		        rectangle.setStroke(Color.RED);
+		        rectangle.setAccessibleRoleDescription("Malus");
+		        break;
+		        case "Save": rectangle.setFill(Color.TRANSPARENT);
+		        rectangle.setStroke(Color.CHOCOLATE);
+		        rectangle.setAccessibleRoleDescription("Save");
+		        break;
+		        case "Bonus": rectangle.setFill(Color.TRANSPARENT);
+		        rectangle.setStroke(Color.GREEN);
+		        rectangle.setAccessibleRoleDescription("Bonus");
+		        break;
+		        case "Boss": rectangle.setFill(Color.TRANSPARENT);
+		        rectangle.setStroke(Color.BLACK);
+		        rectangle.setAccessibleRoleDescription("Boss");
+		        break;
+		        
 		    	   		
-		    	   }
+		        }
 				
 		        if(indiceMap == 0) {
 
@@ -174,7 +173,7 @@ public class Main extends Application {
 		        	root.getChildren().add(rectangle);
 		        mapRectangle.put(indiceMap, rectangle);
 		        indiceMap++;
-		    	
+		    		
 		        if(it == 0)
 					height++;
 				else if(it == 1)
@@ -184,64 +183,51 @@ public class Main extends Application {
 				else if(it == 3)
 					width--;
 
-		      }
+			}
 		     	      
 	}
 	
 	public void boardUtil(BoardItf board) {
-		 buttonde= new Button();
-		 buttonde.setLayoutY(20);
-		 buttonde.setText("Lancer le de ");
-		 
-		 
-		 
-		 tour= new Label("Tour : 1");
-		 tour.setTextFill(Color.BLACK);
-		 tour.setLayoutX(500);
-		 tour.setVisible(true);
-		 
-		 descriptionp1= new Label("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
-		 descriptionp1.setTextFill(Color.BLACK);
-		 descriptionp1.setLayoutX(500);
-		 descriptionp1.setLayoutY(100);
-		 descriptionp1.setVisible(true);
-		 
-		 descriptionp2= new Label("Description " + board.getPlayer2().getName() +": \n Puissance " + board.getPlayer2().getArmy().strike()+" \n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
-		 descriptionp2.setTextFill(Color.BLACK);
-		 descriptionp2.setLayoutX(500);
-		 descriptionp2.setLayoutY(200);
-		 descriptionp2.setVisible(true);
-		 
-		 victory= new Label(" Victoire");
-		 victory.setTextFill(Color.BLACK);
-		 victory.setLayoutX(300);
-		 victory.setVisible(false);
-		 
-		 root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
+		buttonde= new Button();
+		buttonde.setLayoutY(20);
+		buttonde.setText("Lancer le de ");
+		
+		
+		
+		tour= new Label("Tour : 1");
+		tour.setTextFill(Color.BLACK);
+		tour.setLayoutX(500);
+		tour.setVisible(true);
+		
+		descriptionp1= new Label("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
+		descriptionp1.setTextFill(Color.BLACK);
+		descriptionp1.setLayoutX(500);
+		descriptionp1.setLayoutY(100);
+		descriptionp1.setVisible(true);
+		
+		descriptionp2= new Label("Description " + board.getPlayer2().getName() +": \n Puissance " + board.getPlayer2().getArmy().strike()+" \n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
+		descriptionp2.setTextFill(Color.BLACK);
+		descriptionp2.setLayoutX(500);
+		descriptionp2.setLayoutY(200);
+		descriptionp2.setVisible(true);
+		
+		victory= new Label(" Victoire");
+		victory.setTextFill(Color.BLACK);
+		victory.setLayoutX(300);
+		victory.setVisible(false);
+		
+		root.getChildren().addAll(buttonde,tour,descriptionp1,descriptionp2,victory);
 		
 		
 	}
-	public void boardEvent() {
-		 buttonde.setOnAction(new EventHandler<ActionEvent>() {
-			 
-	            @Override
-	            public void handle(ActionEvent event) {
-	               tour.setText("Tour : " + tourInt);
-	               tourInt ++;
-	               System.out.println("Tour : " + tourInt);
-	               
-	             
-	            }
-	        });
-	}
-	
+		
 	public void forwardEventp1(HashMap<Integer,Rectangle> mapRectangle,BoardItf board ) {
 		buttonde.setOnAction(new EventHandler<ActionEvent>() {
-			 
-            @Override
-            public void handle(ActionEvent event) {
-            	
-            	board.turn();
+				
+			@Override
+			public void handle(ActionEvent event) {
+				
+				board.turn();
             	
 
             	actualizeSprits(mapRectangle,board);
@@ -253,53 +239,49 @@ public class Main extends Application {
             		alert.setContentText(board.getBoxes().get(board.getCurrentPlayer().getPosition()).description());
             		alert.showAndWait();
             	}
-            	
+            		
             	board.endTurn();
             	
             	actualizeSprits(mapRectangle,board);
             	
             	if(board.isGameOver()) {
             		Alert alertfinal = new Alert(AlertType.INFORMATION);
-            		if(board.getCurrentPlayer() == board.getPlayer1()) {
-            			alert.setTitle("Game Over");
-                		alert.setHeaderText("");
-                		alert.setContentText("Felicitation au " + board.getPlayer1().getName() +" vous avez gagné : )");
-                		alert.showAndWait();
-                		buttonde.setDisable(true);
+        			alert.setTitle("Game Over");
+        			alert.setHeaderText("");
+        			if(board.getCurrentPlayer() == board.getPlayer1()) {
+        				alert.setContentText("Felicitation au " + board.getPlayer1().getName() +" vous avez gagne : )");
             			
-            		} else if (board.getCurrentPlayer() == board.getPlayer2()) {
-            			alert.setTitle("Game Over");
-                		alert.setHeaderText("");
-                		alert.setContentText("Felicitation au " + board.getPlayer2().getName() +" vous avez gagné : )");
-                		alert.showAndWait();
-                		buttonde.setDisable(true);
-            			
-            		}
+        			} else
+        				alert.setContentText("Felicitation au " + board.getPlayer2().getName() +" vous avez gagne : )");
             		
+        			alert.showAndWait();
+        			buttonde.setDisable(true);
             	}
-            }
+			}
             
-        });
+		});
 		
 		
 	}
 	
 	public void actualizeSprits(HashMap<Integer,Rectangle> mapRectangle,BoardItf board ) {
 		
-    	if(board.getCurrentPlayer() == board.getPlayer1()) {
-    		imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
-    		imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
-    		descriptionp1.setText("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
+		if(board.getCurrentPlayer() == board.getPlayer1()) {
+			imgViewp1.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+30);
+			imgViewp1.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+30);
+			descriptionp1.setText("Description " + board.getPlayer1().getName()+": \n Puissance  " + board.getPlayer1().getArmy().strike()+"\n Point de vie "+board.getPlayer1().getArmy().getHealthPoints());
     	}
     	else {
     		imgViewp2.setX(mapRectangle.get(board.getCurrentPlayer().getPosition()).getX()+2);
     		imgViewp2.setY(mapRectangle.get(board.getCurrentPlayer().getPosition()).getY()+2);
     		descriptionp2.setText("Description " + board.getPlayer2().getName()+": \n Puissance  " + board.getPlayer2().getArmy().strike()+"\n Point de vie "+board.getPlayer2().getArmy().getHealthPoints());
+    		tourInt ++;
+    		tour.setText("Tour : " + tourInt);
     	}
     	
 	}
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+	public static void main(String[] args) {
+    	launch(args);
+	}
 }

@@ -8,7 +8,6 @@ public class SaveBox extends DecoratorBox{
 
 	public SaveBox(Box box) {
 		super(box);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -23,7 +22,6 @@ public class SaveBox extends DecoratorBox{
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Save";
 	}
 	

@@ -7,19 +7,16 @@ public class NeutralBox implements Box{
 
 	@Override
 	public void effect(BoardItf b) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public String description() {
-		// TODO Auto-generated method stub
 		return "";
 	}
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Neutral";
 	}
 

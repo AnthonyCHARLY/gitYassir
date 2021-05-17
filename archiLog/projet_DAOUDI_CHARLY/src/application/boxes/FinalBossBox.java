@@ -14,7 +14,6 @@ public class FinalBossBox extends DecoratorBox {
 
 	public FinalBossBox(Box box) {
 		super(box);
-		// TODO Auto-generated constructor stub
 		army = new UnitGroup("Boss");
 		AgeAbstractFactory unitsFactory = new AgeMiddleFactory();
 		army.addUnit(unitsFactory.infantryUnit("Boss:: infantry1"));
@@ -43,7 +42,6 @@ public class FinalBossBox extends DecoratorBox {
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Boss";
 	}
 	
